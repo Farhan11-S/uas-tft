@@ -448,3 +448,16 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+ALTER TABLE comps ADD CONSTRAINT comps_users_FK FOREIGN KEY (created_by) REFERENCES users(id);
+RENAME TABLE comp_details TO comp_champion_details;
+
+ALTER TABLE comp_champion_details ADD CONSTRAINT comp_champion_details_champions_FK FOREIGN KEY (id_champion) REFERENCES champions(id);
+ALTER TABLE comp_champion_details ADD CONSTRAINT comp_champion_details_comps_FK FOREIGN KEY (id_comp) REFERENCES comps(id);
+
+ALTER TABLE comp_trait_details ADD CONSTRAINT comp_trait_details_traits_FK FOREIGN KEY (id_trait) REFERENCES traits(id);
+ALTER TABLE comp_trait_details ADD CONSTRAINT comp_trait_details_comps_FK FOREIGN KEY (id_comp) REFERENCES comps(id);
+
+ALTER TABLE champion_traits ADD CONSTRAINT champion_traits_champions_FK FOREIGN KEY (champion_id) REFERENCES champions(id);
+ALTER TABLE champion_traits ADD CONSTRAINT champion_traits_traits_FK FOREIGN KEY (trait_id) REFERENCES traits(id);
+
