@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2024 at 07:36 AM
+-- Generation Time: Jun 20, 2024 at 02:19 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -270,10 +270,10 @@ CREATE TABLE `comps` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comp_details`
+-- Table structure for table `comp_champion_details`
 --
 
-CREATE TABLE `comp_details` (
+CREATE TABLE `comp_champion_details` (
   `id` int(11) NOT NULL,
   `id_champion` int(11) NOT NULL,
   `id_comp` int(11) NOT NULL
@@ -349,7 +349,7 @@ INSERT INTO `traits` (`id`, `name`, `min_units`, `max_units`, `image_url`) VALUE
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL
+  `password` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -366,25 +366,32 @@ ALTER TABLE `champions`
 -- Indexes for table `champion_traits`
 --
 ALTER TABLE `champion_traits`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `champion_traits_champions_FK` (`champion_id`),
+  ADD KEY `champion_traits_traits_FK` (`trait_id`);
 
 --
 -- Indexes for table `comps`
 --
 ALTER TABLE `comps`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `comps_users_FK` (`created_by`);
 
 --
--- Indexes for table `comp_details`
+-- Indexes for table `comp_champion_details`
 --
-ALTER TABLE `comp_details`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `comp_champion_details`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `comp_champion_details_champions_FK` (`id_champion`),
+  ADD KEY `comp_champion_details_comps_FK` (`id_comp`);
 
 --
 -- Indexes for table `comp_trait_details`
 --
 ALTER TABLE `comp_trait_details`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `comp_trait_details_traits_FK` (`id_trait`),
+  ADD KEY `comp_trait_details_comps_FK` (`id_comp`);
 
 --
 -- Indexes for table `traits`
@@ -396,7 +403,8 @@ ALTER TABLE `traits`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_unique` (`username`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -421,9 +429,9 @@ ALTER TABLE `comps`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `comp_details`
+-- AUTO_INCREMENT for table `comp_champion_details`
 --
-ALTER TABLE `comp_details`
+ALTER TABLE `comp_champion_details`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -443,24 +451,39 @@ ALTER TABLE `traits`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `champion_traits`
+--
+ALTER TABLE `champion_traits`
+  ADD CONSTRAINT `champion_traits_champions_FK` FOREIGN KEY (`champion_id`) REFERENCES `champions` (`id`),
+  ADD CONSTRAINT `champion_traits_traits_FK` FOREIGN KEY (`trait_id`) REFERENCES `traits` (`id`);
+
+--
+-- Constraints for table `comps`
+--
+ALTER TABLE `comps`
+  ADD CONSTRAINT `comps_users_FK` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `comp_champion_details`
+--
+ALTER TABLE `comp_champion_details`
+  ADD CONSTRAINT `comp_champion_details_champions_FK` FOREIGN KEY (`id_champion`) REFERENCES `champions` (`id`),
+  ADD CONSTRAINT `comp_champion_details_comps_FK` FOREIGN KEY (`id_comp`) REFERENCES `comps` (`id`);
+
+--
+-- Constraints for table `comp_trait_details`
+--
+ALTER TABLE `comp_trait_details`
+  ADD CONSTRAINT `comp_trait_details_comps_FK` FOREIGN KEY (`id_comp`) REFERENCES `comps` (`id`),
+  ADD CONSTRAINT `comp_trait_details_traits_FK` FOREIGN KEY (`id_trait`) REFERENCES `traits` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-ALTER TABLE comps ADD CONSTRAINT comps_users_FK FOREIGN KEY (created_by) REFERENCES users(id);
-RENAME TABLE comp_details TO comp_champion_details;
-
-ALTER TABLE comp_champion_details ADD CONSTRAINT comp_champion_details_champions_FK FOREIGN KEY (id_champion) REFERENCES champions(id);
-ALTER TABLE comp_champion_details ADD CONSTRAINT comp_champion_details_comps_FK FOREIGN KEY (id_comp) REFERENCES comps(id);
-
-ALTER TABLE comp_trait_details ADD CONSTRAINT comp_trait_details_traits_FK FOREIGN KEY (id_trait) REFERENCES traits(id);
-ALTER TABLE comp_trait_details ADD CONSTRAINT comp_trait_details_comps_FK FOREIGN KEY (id_comp) REFERENCES comps(id);
-
-ALTER TABLE champion_traits ADD CONSTRAINT champion_traits_champions_FK FOREIGN KEY (champion_id) REFERENCES champions(id);
-ALTER TABLE champion_traits ADD CONSTRAINT champion_traits_traits_FK FOREIGN KEY (trait_id) REFERENCES traits(id);
-
-ALTER TABLE users MODIFY COLUMN password varchar(200) NOT NULL;
-ALTER TABLE users ADD CONSTRAINT users_unique UNIQUE KEY (username);
-
