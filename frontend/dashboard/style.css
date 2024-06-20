@@ -17,17 +17,19 @@ body {
   flex-direction: column;
   align-items: center;
   padding-top: 20px;
+  justify-content: space-between; /* Ensure space between content and logout button */
 }
 
 .sidebar h2 {
   margin-bottom: 30px;
-  white-space: nowrap; 
+  white-space: nowrap;  /* Prevents text from wrapping */
 }
 
 .sidebar ul {
   list-style: none;
   padding: 0;
   width: 100%;
+  flex-grow: 1; /* Allow ul to grow and take available space */
 }
 
 .sidebar ul li {
@@ -40,13 +42,33 @@ body {
   padding: 15px 20px;
   display: block;
   width: 80%;
-  transition: background-color 0.3s ease, padding-left 0.3s ease;  
+  transition: background-color 0.3s ease, padding-left 0.3s ease; 
   white-space: nowrap;  
 }
 
 .sidebar ul li a:hover {
   background-color: rgba(52, 73, 94, 0.8);
-  padding-left: 30px;  
+  padding-left: 30px;  /* Add padding-left on hover to create indent effect */
+}
+
+.logout-container {
+  width: 100%;
+  padding: 20px;
+}
+
+.logout-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #e74c3c;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #c0392b;
 }
 
 .main-content {

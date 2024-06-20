@@ -15,6 +15,9 @@
             <li><a href="#traits">Traits</a></li>
             <!-- <li><a href="#team-planner">Team Planner</a></li> -->
         </ul>
+        <div class="logout-container">
+            <button class="logout-button">Logout</button>
+        </div>
     </div>
     <div class="main-content">
         <header>
@@ -23,15 +26,29 @@
         <section id="overview">
             <div class="card">
                 <h3>Total Users</h3>
-                <p>150</p>
-            </div>
-            <div class="card">
-                <h3>Total Traits</h3>
-                <p>45</p>
+                <?php
+                    include '../../backend/main.php';
+                    // $conn = connect();
+                    $data = mysqli_query($conn, "select * from users");
+                    $total_users = mysqli_num_rows($data);
+                    ?>
+                <p><?php echo $total_users; ?></p>
             </div>
             <div class="card">
                 <h3>Total Champions</h3>
-                <p>30</p>
+                <?php
+                    $data = mysqli_query($conn, "select * from champions");
+                    $total_champions = mysqli_num_rows($data);
+                    ?>
+                <p><?php echo $total_champions; ?></p>
+            </div>
+            <div class="card">
+                <h3>Total Traits</h3>
+                <?php
+                    $data = mysqli_query($conn, "select * from traits");
+                    $total_traits = mysqli_num_rows($data);
+                    ?>
+                <p><?php echo $total_traits; ?></p>
             </div>
         </section>
     </div>
