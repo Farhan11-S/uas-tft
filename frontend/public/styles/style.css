@@ -1,0 +1,68 @@
+@font-face {
+  font-family: 'frizQuadrataRegular';
+  src: url('../font/friz-quadrata-regular-os-5870333951e7c.woff') format('woff'),
+       url('../font/friz-quadrata-regular-os-5870333951e7c.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'frizQuadrataBoldItalic';
+  src: url('../font/friz-quadrata-bold-italic-os-5870341205e0f.woff') format('woff'),
+       url('../font/friz-quadrata-bold-italic-os-5870341205e0f.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'tenterhooksReguler';
+  src: url('../font/FontsFree-Net-tenterhooks-regular.woff') format('woff'),
+       url('../font/FontsFree-Net-tenterhooks-regular.ttf') format('truetype');
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  background-image: url("../images/bg-tft.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.heading {
+  font-family: 'frizQuadrataBoldItalic';
+  font-size: 48px;
+  color: white;
+  padding: 32px 98px;
+}
+
+.hero {
+  color: white;
+  width: 450px;
+  text-wrap: wrap;
+  position: absolute;
+  left: 10%;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.hero .title {
+  font-family: 'tenterhooksReguler';
+  font-size: 96px;
+  text-transform: uppercase;
+}
+
+.hero .desc {
+  font-family: 'frizQuadrataRegular';
+  line-height: 200%;
+  font-size: 16px;
+}
+
+.hero .button-sign-in {
+  width: fit-content;
+  font-family: 'frizQuadrataBoldItalic';
+  font-size: 20px;
+  text-transform: uppercase;
+  padding: 16px 32px;
+  border: 3px solid #887953;
+  border-radius: 8px;
+  margin-top: 24px;
+}
