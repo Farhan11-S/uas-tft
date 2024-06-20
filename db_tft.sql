@@ -461,3 +461,6 @@ ALTER TABLE comp_trait_details ADD CONSTRAINT comp_trait_details_comps_FK FOREIG
 ALTER TABLE champion_traits ADD CONSTRAINT champion_traits_champions_FK FOREIGN KEY (champion_id) REFERENCES champions(id);
 ALTER TABLE champion_traits ADD CONSTRAINT champion_traits_traits_FK FOREIGN KEY (trait_id) REFERENCES traits(id);
 
+ALTER TABLE users MODIFY COLUMN password varchar(200) NOT NULL;
+ALTER TABLE users ADD CONSTRAINT users_unique UNIQUE KEY (username);
+
