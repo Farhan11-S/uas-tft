@@ -1,117 +1,26 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>TFT COMP BUILDER</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='data.js'></script>
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./public/styles/style.css" />
+  </head>
 
-<body>
-    <div>
-        <h2>TFT YOUR COMP (MAX 28)</h2>
-
-        <table id="list-build-comp">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>IMAGE</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </div>
-    <div id="trait-showcase"></div>
-    <div>
-        <h2>TFT LIST UNITS</h2>
-
-        <table id="list-unit">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>IMAGE</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </div>
-</body>
-<script>
-    const compBuild = []
-    const compBuildTraits = {}
-    const addToBuild = (champ) => {
-        if (compBuild.includes(champ) || compBuild.length >= 28) return
-        compBuild.push(champ)
-
-        traitAdd(champ)
-        rowBuilder('list-build-comp', champ, (tbody) => removeFromBuild(tbody, champ))
-    }
-
-    const removeFromBuild = (tbody, champ) => {
-        const index = compBuild.indexOf(champ)
-        tbody.deleteRow(index)
-        compBuild.splice(index, 1)
-        traitRemove(champ)
-    }
-
-    const rowBuilder = (table, champ, onClickAction) => {
-        const tbodyRef = document.getElementById(table).getElementsByTagName('tbody')[0]
-
-        // Insert a row at the end of table
-        const newRow = tbodyRef.insertRow()
-
-        // Insert a cell at the end of the row
-        const nameCell = newRow.insertCell()
-        const imageCell = newRow.insertCell()
-
-        // Append a text node to the cell
-        const nameNode = document.createTextNode(champ.name)
-        const imageNode = document.createElement("img")
-        imageNode.src = `https://ap.tft.tools/img/face/${champ.apiName}.jpg?w=52`
-
-        newRow.onclick = () => onClickAction(tbodyRef, champ)
-
-        nameCell.appendChild(nameNode)
-        imageCell.appendChild(imageNode)
-    }
-
-    const traitAdd = (champ) => {
-        champ.traits.forEach((trait) => {
-            if (!compBuildTraits[trait]) compBuildTraits[trait] = 0
-            compBuildTraits[trait]++
-        })
-        traitDivUpdate()
-    }
-
-    const traitRemove = (champ) => {
-        champ.traits.forEach((trait) => {
-            compBuildTraits[trait]--
-            if (compBuildTraits[trait] <= 0) delete compBuildTraits[trait]
-        })
-        traitDivUpdate()
-    }
-
-    const traitDivUpdate = () => {
-        const traitDiv = document.getElementById('trait-showcase')
-        traitDiv.innerHTML = ''
-
-        Object.keys(compBuildTraits).forEach(function (key) {
-            const paragraphNode = document.createElement(`p`)
-            const textNode = document.createTextNode(`${key} ${compBuildTraits[key]}`)
-
-            paragraphNode.appendChild(textNode)
-            traitDiv.appendChild(paragraphNode)
-        });
-    }
-
-    data.champions.forEach((champ) => {
-        rowBuilder('list-unit', champ, (tbody, champion) => addToBuild(champion))
-    })
-</script>
-
+  <body>
+    <body>
+      <div class="heading">TFT</div>
+      <div class="hero">
+        <div class="title">inkborn fables</div>
+        <div class="desc">
+          Magical ink is seeping into the very fabric of the Convergence,
+          transporting Little Legends to a whimsical, painted world. Perhaps the
+          spirits you encounter here will bestow unique powers and paths to
+          victory… if you’re willing to take the risk of asking for their favor.
+        </div>
+        <div class="button-sign-in">sign in</div>
+      </div>
+    </body>
+  </body>
 </html>
