@@ -21,8 +21,13 @@ $list = listCompByUserID($conn, $_SESSION['id']);
 
 <body>
   <div class="header">
-    <img src="./public/images/default-avatar.jpg" class="avatar" alt="avatar" />
-    <div class="username"><?= $_SESSION['username'] ?></div>
+    <div class="left-side">
+      <img src="./public/images/default-avatar.jpg" class="avatar" alt="avatar" />
+      <div class="username"><?= $_SESSION['username'] ?></div>
+    </div>
+    <form action="../backend/auth.php" method="post">
+      <button class="button-logout" name="logout" type="submit"><i class="fa fa-sign-out"></i></button>
+    </form>
   </div>
   <div class="my-comps">
     <div class="header-comps">
