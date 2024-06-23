@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 @font-face {
   font-family: 'frizQuadrataRegular';
   src: url('../font/friz-quadrata-regular-os-5870333951e7c.woff') format('woff'),
@@ -24,6 +25,8 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  font-family: "Outfit", sans-serif;
+  color: #000;
 }
 
 .heading {
@@ -65,4 +68,73 @@ body {
   border: 3px solid #887953;
   border-radius: 8px;
   margin-top: 24px;
+  cursor: pointer;
+  color: #fff;
+}
+
+a {
+  text-decoration:none;
+}
+
+.container {
+  background: #fff;
+  border-radius: 18px;
+  padding: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  -webkit-border-radius: 18px;
+  -moz-border-radius: 18px;
+  -ms-border-radius: 18px;
+  -o-border-radius: 18px;
+}
+
+.container .form-title {
+  font-size: 40px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.container .create-account {
+  text-align: center;
+  font-weight: 600;
+  color: #000;
+}
+
+form {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+form label {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+*:focus {
+  outline: none;
+}
+
+form .input-auth {
+  padding: 0px 6px;
+  width: 245px;
+  height: 32px;
+  margin-top: 4px;
+  display: block;
+  border: 0;
+  border-radius: 4px;
+  background: #F0F4FC;
+}
+
+form button {
+  padding: 10px;
+  border-radius: 12px;
+  border: 0;
+  color: #fff;
+  background: #D23538;
 }
