@@ -12,7 +12,12 @@
 
 <body>
 
+    <?php
+    include '../backend/main.php';
+    session_start();
+    if (!isset($_SESSION['role']) && $_SESSION['role'] != 'admin') header("location:../auth/sign-in.php");
 
+    ?>
     <!-- =============== Navigation ================ -->
     <div class="container">
         <div class="navigation">
@@ -86,7 +91,6 @@
                 <div class="card">
                     <div>
                         <?php
-                        include '../backend/main.php';
                         $data = mysqli_query($conn, "SELECT COUNT(*) AS total_rows FROM users");
                         $row = mysqli_fetch_assoc($data);
                         $totalUsers = $row['total_rows'];

@@ -239,7 +239,7 @@ body {
 }
 .details .championsList table tbody {
   display: block;
-  height: 800px;
+  height: 700px;
   overflow: auto;
   width: 100%;
 }
