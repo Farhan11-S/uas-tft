@@ -174,6 +174,7 @@ body {
 }
 
 /* ================== Champions List ============== */
+/* =============== Champions List ============== */
 .details {
   position: relative;
   width: 100%;
@@ -214,9 +215,11 @@ body {
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
+  table-layout: fixed;
 }
 .details table thead td {
   font-weight: 600;
+  padding: 10px;
 }
 .details .championsList table tr {
   color: var(--black1);
@@ -227,26 +230,40 @@ body {
 }
 .details .championsList table tr td {
   padding: 10px;
-}
-.details .championsList table tr td:last-child {
   text-align: center;
 }
-.details .championsList table tr td:nth-child(2) {
+.details .championsList table thead {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+.details .championsList table tbody {
+  display: block;
+  height: 800px;
+  overflow: auto;
+  width: 100%;
+}
+.details .championsList table tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+.details .championsList table tbody td {
+  width: 20%;
+}
+.details .championsList table tbody td:nth-child(2),
+.details .championsList table tbody td:nth-child(3),
+.details .championsList table tbody td:nth-child(4),
+.details .championsList table tbody td:nth-child(5) {
   text-align: center;
 }
-.details .championsList table tr td:nth-child(3) {
-  text-align: center;
-}
-.details .championsList table tr td:nth-child(4) {
-  text-align: center;
-}
-.details .championsList table tr td img{
+.details .championsList table tbody td img {
   width: 80px;
+  height: auto;
 }
-
 
 .action .btn,
-.modal-content .btn{
+.modal-content .btn {
   display: inline-block;
   padding: 10px 20px;
   text-decoration: none;
@@ -259,26 +276,26 @@ body {
 }
 
 .action .btn-edit {
-  background-color: #4CAF50; 
+  background-color: #4CAF50;
 }
 
 .action .btn-delete,
 .modal-content .btn-delete {
-  background-color: #f44336; 
+  background-color: #f44336;
 }
 
 .modal-content .btn-cancel {
   background-color: grey;
-  margin-left: 10px; 
+  margin-left: 10px;
 }
 
 .action .btn:hover,
-.modal-content .btn:hover{
+.modal-content .btn:hover {
   transform: translateY(-2px);
 }
 
 .action .btn-edit:hover {
-  background-color: #45a049; 
+  background-color: #45a049;
 }
 
 .action .btn-delete:hover,
@@ -289,33 +306,33 @@ body {
 /* <==================== Modal Popup ========================== */
 .modal {
   display: none;
-  position: fixed; 
-  z-index: 1; 
+  position: fixed;
+  z-index: 1;
   left: 0;
   top: 0;
-  width: 100%; 
-  height: 100%; 
-  overflow: auto; 
-  background-color: rgb(0,0,0); 
-  background-color: rgba(0,0,0,0.4); 
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
-  position: relative; 
+  position: relative;
   background-color: #fefefe;
-  margin: 10% auto; 
+  margin: 10% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 30%; 
-  border-radius: 10px; 
+  width: 30%;
+  border-radius: 10px;
 }
 
 .close,
 .edit-close,
 .del-close {
-  position: absolute; 
-  top: 10px; 
-  right: 20px; /* Jarak dari sisi kanan */
+  position: absolute;
+  top: 10px;
+  right: 20px;
   color: #aaa;
   font-size: 28px;
   font-weight: bold;
@@ -334,41 +351,42 @@ body {
 
 .addTable,
 .editTable {
-  width: 100%; 
-  border-collapse: collapse; 
+  width: 100%;
+  border-collapse: collapse;
   margin: 20px 0;
 }
 
 .addTable td,
 .editTable td {
-  padding: 10px; 
-  border-bottom: 1px solid #ddd; 
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
 }
 
 .addTable input[type="text"],
-.editTable input[type="text"], select {
-  width: 100%; 
-  padding: 8px; 
-  margin: 5px 0 15px; 
-  box-sizing: border-box; 
-  border: 1px solid #ccc; 
-  border-radius: 4px; 
+.editTable input[type="text"],
+select {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0 15px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .btn-simpan,
 .btn-update {
-  background-color: #4CAF50; 
-  color: white; 
-  padding: 10px 20px; 
-  border: none; 
-  border-radius: 4px; 
-  cursor: pointer; 
-  float: left; 
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: left;
 }
 
 .btn-simpan:hover,
 .btn-update:hover {
-  background-color: #45a049; 
+  background-color: #45a049;
 }
 
 /* ====================== Responsive Design ========================== */
