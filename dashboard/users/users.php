@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin</title>
     <!-- ======= Styles ====== -->
-    <link rel="stylesheet" href="../styles/users.css">
+    <link rel="stylesheet" href="../../public/styles/users.css">
 </head>
 
 <body>
@@ -18,9 +18,8 @@
                 <li>
                     <a href="#">
                         <span class="icon">
-                            <ion-icon name="logo-apple"></ion-icon>
+                            <span class="title">TFT</span>
                         </span>
-                        <span class="title">TFT</span>
                     </a>
                 </li>
 

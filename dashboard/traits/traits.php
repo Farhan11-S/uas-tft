@@ -1,3 +1,34 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search'])) {
+    include "../../backend/main.php";
+    $search = htmlspecialchars($_POST['search']);
+    if ($search == "") {
+        $query = "SELECT * FROM traits";
+    } else {
+        $query = "SELECT * FROM traits WHERE name LIKE '%$search%'";
+    }
+
+    $data = mysqli_query($conn, $query);
+    if (mysqli_num_rows($data) > 0) {
+        while($d = mysqli_fetch_array($data)) {
+            echo "
+                <tr>
+                    <td>{$d['name']}</td>
+                    <td><img src='{$d['image_url']}' alt=''></td>
+                    <td class='action'>
+                        <a href='#' data-id='{$d['id']}' data-name='{$d['name']}' data-imgurl='{$d['image_url']}' class='btn btn-edit'>Edit</a>
+                    </td>
+                </tr>";
+        }
+    } else {
+        echo "
+            <tr class='no-data'>
+                <td colspan='3' style='text-align: center;'>No data available</td>
+            </tr>";
+    }
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +38,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin</title>
     <!-- ======= Styles ====== -->
-    <link rel="stylesheet" href="../styles/traits.css">
+    <link rel="stylesheet" href="../../public/styles/traits.css">
 </head>
 
 <body>
@@ -18,9 +49,8 @@
                 <li>
                     <a href="#">
                         <span class="icon">
-                            <ion-icon name="logo-apple"></ion-icon>
+                            <span class="title">TFT</span>
                         </span>
-                        <span class="title">TFT</span>
                     </a>
                 </li>
 
@@ -77,6 +107,14 @@
                 <div class="toggle">
                     <ion-icon name="menu-outline"></ion-icon>
                 </div>
+
+                <div class="search">
+                    <label>
+                    <input type="text" placeholder="Search Champion Here" id="searchInput" oninput="searchTrait()">
+                    <ion-icon name="search-outline"></ion-icon>
+                    </label>
+                </div>
+
             </div>
 
             <!-- ================ Traits List ================= -->
@@ -95,7 +133,7 @@
                             </tr>
                         </thead>
                         
-                        <tbody>
+                        <tbody id="traitsTable">
                             <?php
                             include "../../backend/main.php";
                             $data = mysqli_query($conn, "select * from traits");
@@ -218,6 +256,22 @@
         }
 
         handleModal("editUserModal", ".btn-edit", "edit-close");
+
+        function searchTrait() {
+            var input = document.getElementById('searchInput').value;
+
+            // Buat request AJAX
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Update konten table dengan respons dari server
+                    document.getElementById('traitsTable').innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send("search=" + encodeURIComponent(input));
+        }
     </script>
 
     <!-- ====== ionicons ======= -->
