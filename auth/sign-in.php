@@ -1,3 +1,10 @@
+<?php
+
+session_start();
+if (isset($_SESSION['username'])) header("location:../comps.php");
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

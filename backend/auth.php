@@ -71,7 +71,7 @@ if (isset($_POST['login'])) {
         // Login successful, you can use the user data here
         $_SESSION['username'] = $username;
         $_SESSION['status'] = "login";
-        header("location:../index.php");
+        header("location:../comps.php");
     } else {
         // Login failed
         header("location:../auth/sign-in.php?error=1");
