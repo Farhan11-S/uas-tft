@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 23, 2024 at 11:52 AM
+-- Generation Time: Jun 23, 2024 at 02:40 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -307,33 +307,33 @@ CREATE TABLE `traits` (
 --
 
 INSERT INTO `traits` (`id`, `name`, `min_units`, `max_units`, `image_url`) VALUES
-(1, 'Ghostly', '2,4,6,8', '3,5,7,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_ghostly.png'),
-(2, 'Fortune', '3,5,7', '4,6,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_fortune.png'),
+(1, 'Ghostly', '2,4,6,8', '3,5,7,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_ghostly.png'),
+(2, 'Fortune', '3,5,7', '4,6,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_4_fortune.png'),
 (3, 'Lovers', '1', '25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_lovers.png'),
-(4, 'Reaper', '2,4', '3,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_reaper.png'),
-(6, 'Umbral', '2,4,6,9', '3,5,8,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_umbral.png'),
-(7, 'Dryad', '2,4,6', '3,5,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_dryad.png'),
-(8, 'Sage', '2,3,4,5', '2,3,4,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_sage.png'),
-(9, 'Arcanist', '2,4,6,8', '3,5,7,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_arcanist.png'),
-(10, 'Inkshadow', '3,5,7', '4,6,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_inkshadow.png'),
-(11, 'Altruist', '2,3,4', '2,3,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_altruist.png'),
+(4, 'Reaper', '2,4', '3,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_reaper.png'),
+(6, 'Umbral', '2,4,6,9', '3,5,8,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_umbral.png'),
+(7, 'Dryad', '2,4,6', '3,5,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_dryad.png'),
+(8, 'Sage', '2,3,4,5', '2,3,4,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_sage.png'),
+(9, 'Arcanist', '2,4,6,8', '3,5,7,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_6_arcanist.png'),
+(10, 'Inkshadow', '3,5,7', '4,6,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_ink_shadow.png'),
+(11, 'Altruist', '2,3,4', '2,3,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_altruist.png'),
 (12, 'Artist', '1', '25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_artist.png'),
-(13, 'Exalted', '3,5', '4,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_exalted.png'),
-(14, 'Heavenly', '2,3,4,5,6,7', '2,3,4,5,6,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_heavenly.png'),
-(15, 'Porcelain', '2,4,6', '3,5,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_porcelain.png'),
-(16, 'Duelist', '2,4,6,8', '3,5,7,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_duelist.png'),
-(17, 'Dragonlord', '2,3,4,5', '2,3,4,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_dragonlord.png'),
-(18, 'Bruiser', '2,4,6,8', '3,5,7,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_bruiser.png'),
+(13, 'Exalted', '3,5', '4,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_exalted.png'),
+(14, 'Heavenly', '2,3,4,5,6,7', '2,3,4,5,6,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_heavenly.png'),
+(15, 'Porcelain', '2,4,6', '3,5,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_porcelain.png'),
+(16, 'Duelist', '2,4,6,8', '3,5,7,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_8_duelist.png'),
+(17, 'Dragonlord', '2,3,4,5', '2,3,4,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_dragonlord.png'),
+(18, 'Bruiser', '2,4,6,8', '3,5,7,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_6_bruiser.png'),
 (19, 'Trickshot', '2,4', '3,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_altruist_trickshot.png'),
-(20, 'Fated', '3,5,7,10', '4,6,9,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_fated.png'),
+(20, 'Fated', '3,5,7,10', '4,6,9,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_fated.png'),
 (21, 'Invoker', '2,4,6', '3,5,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_invoker.png'),
 (22, 'Great', '1', '25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_great.png'),
-(23, 'Sniper', '2,4,6', '3,5,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_sniper.png'),
-(24, 'Mythic', '3,5,7,10', '4,6,9,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_mythic.png'),
+(23, 'Sniper', '2,4,6', '3,5,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_6_sniper.png'),
+(24, 'Mythic', '3,5,7,10', '4,6,9,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_mythic.png'),
 (25, 'Spirit Walker', '1', '25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_spirit_walker.png'),
-(26, 'Warden', '2,4,6', '3,5,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_warden.png'),
-(27, 'Behemoth', '2,4,6', '3,5,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_behemoth.png'),
-(28, 'Storyweaver', '3,5,7,10', '4,6,9,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_storyweaver.png');
+(26, 'Warden', '2,4,6', '3,5,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_warden.png'),
+(27, 'Behemoth', '2,4,6', '3,5,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_behemoth.png'),
+(28, 'Storyweaver', '3,5,7,10', '4,6,9,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_storyweaver.png');
 
 -- --------------------------------------------------------
 
