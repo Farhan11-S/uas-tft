@@ -251,9 +251,10 @@ body {
 /* ================== recent Comps List ============== */
 .details {
   position: relative;
-  width: 850px;
+  width: 100%;
   padding: 20px;
   display: grid;
+  grid-template-columns: 1fr 420px;
   grid-gap: 30px;
   /* margin-top: 10px; */
 }
@@ -268,6 +269,16 @@ body {
   border-radius: 20px;
 }
 
+.details .recentCustomers {
+  position: relative;
+  width: 100%;
+  display: grid;
+  padding: 20px; 
+  background: var(--white);
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+}
+
 .details .cardHeader {
   display: flex;
   justify-content: space-between;
@@ -276,14 +287,6 @@ body {
 .cardHeader h2 {
   font-weight: 600;
   color: var(--blue);
-}
-.cardHeader .btn {
-  position: relative;
-  padding: 5px 10px;
-  background: var(--blue);
-  text-decoration: none;
-  color: var(--white);
-  border-radius: 6px;
 }
 
 .details table {
@@ -317,6 +320,24 @@ body {
 .details .recentCompCreated table tr td:nth-child(3) {
   text-align: center;
 }
+.details .recentCustomers table tr {
+  color: var(--black1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.details .recentCustomers table tr:last-child {
+  border-bottom: none;
+}
+.details .recentCustomers table tbody tr:hover {
+  background: var(--blue);
+  color: var(--white);
+}
+.details .recentCustomers table tr td {
+  padding: 10px;
+}
+.details .recentCustomers table tr td:last-child {
+  text-align: start;
+}
+
 
 /* ====================== Responsive Design ========================== */
 @media (max-width: 991px) {

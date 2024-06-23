@@ -185,6 +185,41 @@
                         </tbody>
                     </table>
                 </div>
+                
+                <div class="recentCustomers">
+                    <div class="cardHeader">
+                        <h2>Recent User Registered</h2>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Username</td>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <?php
+                            $data = mysqli_query($conn, "SELECT * FROM users WHERE role = 'user' ORDER BY id DESC");
+                            if(mysqli_num_rows($data) > 0) {
+                                while($d = mysqli_fetch_assoc($data)) {
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $d['username']; ?></td>
+                                    </tr>
+                                    <?php
+                                }
+                            } else {
+                                ?>
+                                    <tr class="no-data">
+                                        <td colspan="1" style="text-align: center;">No data available</td>
+                                    </tr>
+                                <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
         </div>
