@@ -80,38 +80,110 @@ ORDER BY
     return $comps;
 }
 
-function detailComp($conn, $id)
+function getChampionsWithTraits($conn, $championIds)
 {
-    $query = "SELECT * FROM comps WHERE id = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("s", $id);
-    $stmt->execute();
-    $result = $stmt->get_result();
 
-    $message = messageBuilder('Failed to get detail comp', [], 0);
-
-    // Check if the user exists
-    if ($result->num_rows > 0) {
-        $message = messageBuilder('Success get detail comp', $result->fetch_assoc());
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
     }
 
-    $stmt->close();
+    // Sanitize input
+    if (!empty($championIds)) $championIds = implode(',', array_map('intval', $championIds));
+
+    // Query to get champions with traits
+    $sql = "
+        SELECT 
+            c.id as champion_id, 
+            c.api_name, 
+            c.name as champion_name, 
+            c.cost, 
+            c.image_url as champion_image_url,
+            t.id as trait_id,
+            t.name as trait_name,
+            t.min_units,
+            t.max_units,
+            t.image_url as trait_image_url
+        FROM champions c
+        LEFT JOIN champion_traits ct ON c.id = ct.champion_id
+        LEFT JOIN traits t ON ct.trait_id = t.id
+    ";
+
+    if (!empty($championIds)) $sql = $sql . ' WHERE c.id IN ($championIds)';
+
+    $result = $conn->query($sql);
+
+    $champions = [];
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $champions[$row['champion_id']]['details'] = [
+                'api_name' => $row['api_name'],
+                'name' => $row['champion_name'],
+                'cost' => $row['cost'],
+                'image_url' => $row['champion_image_url']
+            ];
+            $champions[$row['champion_id']]['traits'][] = [
+                'id' => $row['trait_id'],
+                'name' => $row['trait_name'],
+                'min_units' => $row['min_units'],
+                'max_units' => $row['max_units'],
+                'image_url' => $row['trait_image_url']
+            ];
+        }
+    }
+
     $conn->close();
-    return $message;
+
+    return $champions;
 }
 
-function storeComp($conn, $data)
+function storeComp($conn, $championIds, $compTitle, $compCreatedBy)
 {
-    $query = "INSERT INTO comps (title, created_by) VALUES (?, ?)";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("ss", $data['title'], $data['created_by']);
-    $stmt->execute();
+    // Start transaction
+    $conn->begin_transaction();
 
-    if (!$stmt->execute()) {
-        return messageBuilder($stmt->error, [], 0);
+    try {
+        // Insert into comps
+        $stmt = $conn->prepare("INSERT INTO comps (title, created_by) VALUES (?, ?)");
+        $stmt->bind_param("si", $compTitle, $compCreatedBy);
+        $stmt->execute();
+        $compId = $stmt->insert_id;
+        $stmt->close();
+
+        // Insert into comp_champion_details and comp_trait_details
+        $champions = getChampionsWithTraits($conn, $championIds);
+
+        $traitCounts = [];
+        foreach ($champions as $championId => $championData) {
+            // Insert into comp_champion_details
+            $stmt = $conn->prepare("INSERT INTO comp_champion_details (id_champion, id_comp) VALUES (?, ?)");
+            $stmt->bind_param("ii", $championId, $compId);
+            $stmt->execute();
+            $stmt->close();
+
+            // Count traits
+            foreach ($championData['traits'] as $trait) {
+                if (!isset($traitCounts[$trait['id']])) {
+                    $traitCounts[$trait['id']] = 0;
+                }
+                $traitCounts[$trait['id']]++;
+            }
+        }
+
+        // Insert into comp_trait_details
+        foreach ($traitCounts as $traitId => $count) {
+            $stmt = $conn->prepare("INSERT INTO comp_trait_details (id_trait, id_comp, value) VALUES (?, ?, ?)");
+            $stmt->bind_param("iii", $traitId, $compId, $count);
+            $stmt->execute();
+            $stmt->close();
+        }
+
+        // Commit transaction
+        $conn->commit();
+    } catch (Exception $e) {
+        // Rollback transaction on error
+        $conn->rollback();
+        throw $e;
     }
 
-    $stmt->close();
     $conn->close();
-    return messageBuilder('Register Success', [], 1);
 }

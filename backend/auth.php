@@ -72,7 +72,12 @@ if (isset($_POST['login'])) {
         $_SESSION['id'] = $user['id'];
         $_SESSION['username'] = $username;
         $_SESSION['status'] = "login";
-        header("location:../comps.php");
+
+        if ($user['role'] == 'admin') {
+            header("location:../dashboard/index.php");
+        } else {
+            header("location:../comps.php");
+        }
     } else {
         // Login failed
         header("location:../auth/sign-in.php?error=1");
