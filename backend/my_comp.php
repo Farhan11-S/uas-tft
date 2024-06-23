@@ -99,11 +99,6 @@ function getCompsWithChampionsAndTraits($conn, $userId)
 
 function getChampionsWithTraits($conn, $championIds = [])
 {
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
     // Sanitize input
     if (!empty($championIds)) $championIds = implode(',', array_map('intval', $championIds));
 
@@ -205,11 +200,24 @@ function storeComp($conn, $championIds, $compTitle, $compCreatedBy)
     // $conn->close();
 }
 
+function deleteComp($conn, $idComp)
+{
+    $conn->query("DELETE FROM comps WHERE id = '$idComp'");
+}
+
 if (isset($_POST['store'])) {
     $idChampions = $_POST['id_champions'];
     $compTitle = $_POST['title'];
 
     storeComp($conn, $idChampions, $compTitle, $_SESSION['id']);
+
+    header("location:../comps.php");
+}
+
+if (isset($_POST['delete'])) {
+    $idComp = $_POST['id_comp'];
+
+    deleteComp($conn, $idComp);
 
     header("location:../comps.php");
 }

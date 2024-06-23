@@ -24,7 +24,6 @@ $listChampion = getChampionsWithTraits($conn);
 
 <script>
     const listChampion = <?= json_encode($listChampion, JSON_HEX_TAG) ?>;
-    console.log(listChampion);
 
     const championPicks = [];
     const traitPicks = {};
@@ -34,6 +33,9 @@ $listChampion = getChampionsWithTraits($conn);
         const index = championPicks.indexOf(idChamp)
         championPicks.splice(index, 1)
 
+        const hiddenInput = document.getElementById('hidden-input-' + idChamp)
+        hiddenInput.remove()
+
         traitRemove(listChampion[idChamp])
         const element = document.getElementById(idChamp);
         element.remove();
@@ -41,6 +43,7 @@ $listChampion = getChampionsWithTraits($conn);
 
     const rowBuilder = (idChamp) => {
         if (championPicks.includes(idChamp)) return
+        if (championPicks.length >= 11) return
 
         championAdd(idChamp)
         traitAdd(listChampion[idChamp])
@@ -63,6 +66,7 @@ $listChampion = getChampionsWithTraits($conn);
 
         hiddenInput.hidden = true
         hiddenInput.name = 'id_champions[]'
+        hiddenInput.id = 'hidden-input-' + idChamp
         hiddenInput.setAttribute('value', idChamp)
 
         formComp.appendChild(hiddenInput)
@@ -71,18 +75,23 @@ $listChampion = getChampionsWithTraits($conn);
 
     const traitAdd = (champ) => {
         champ.traits.forEach((trait) => {
-            if (!traitPicks[trait.name]) traitPicks[trait.name] = 0
-            traitPicks[trait.name]++
+            const splitMinUnit = trait.min_units.split(',')
+            if (!traitPicks[trait.name]) traitPicks[trait.name] = {
+                value: 0,
+                name: trait.name,
+                image_url: trait.image_url,
+                maxUnit: splitMinUnit[splitMinUnit.length - 1]
+            }
+            traitPicks[trait.name].value++
         });
 
-        console.log(traitPicks);
         traitSectionUpdate()
     }
 
     const traitRemove = (champ) => {
         champ.traits.forEach((trait) => {
-            traitPicks[trait.name]--
-            if (traitPicks[trait.name] <= 0) delete traitPicks[trait.name]
+            traitPicks[trait.name].value--
+            if (traitPicks[trait.name].value <= 0) delete traitPicks[trait.name]
         })
         traitSectionUpdate()
     }
@@ -103,15 +112,19 @@ $listChampion = getChampionsWithTraits($conn);
 
 
         Object.keys(traitPicks).forEach(function(key) {
-            const titleTextNode = document.createTextNode(key)
-            const valueTextNode = document.createTextNode(traitPicks[key])
+            const trait = traitPicks[key]
+            const valueTextNode = document.createTextNode(key + ' ' + trait.value + '/' + trait.maxUnit)
+
+            const imageNode = document.createElement("img")
+            imageNode.src = trait.image_url
+            imageNode.className = 'unit'
 
             const cardTrait = document.createElement('div')
             cardTrait.className = 'card-trait'
 
             const traitTitleDiv = document.createElement('div')
             traitTitleDiv.className = 'title-trait'
-            traitTitleDiv.append(titleTextNode)
+            traitTitleDiv.append(imageNode)
 
 
             const traitValueDiv = document.createElement('div')

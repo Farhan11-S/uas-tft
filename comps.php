@@ -7,11 +7,7 @@ if(!isset($_SESSION))
 }
 if (!isset($_SESSION['username'])) header("location:./auth/sign-in.php");
 
-
 $list = getCompsWithChampionsAndTraits($conn, $_SESSION['id']);
-// header('Content-Type: application/json');
-// echo json_encode($list);
-// die;
 
 ?>
 <!DOCTYPE html>
@@ -65,7 +61,7 @@ $list = getCompsWithChampionsAndTraits($conn, $_SESSION['id']);
     ?>
     <div class="comps">
       <?php
-      foreach ($list as $comp) {
+      foreach ($list as $id => $comp) {
       ?>
         <div class="card-comp" style="margin-bottom: 8px">
           <div><?= $comp['title'] ?></div>
@@ -90,7 +86,10 @@ $list = getCompsWithChampionsAndTraits($conn, $_SESSION['id']);
           </div>
           <div class="action-comp">
             <i class="fa fa-edit"></i>
-            <i class="fa fa-trash" style="color: red; margin-top: 8px"></i>
+            <form action="./backend/my_comp.php" method="post">
+              <input type="hidden" name="id_comp" value="<?= $id ?>">
+              <button type="submit" name="delete" class="fa fa-trash" style="color: red; margin-top: 8px"></button>
+            </form>
           </div>
         </div>
       <?php
