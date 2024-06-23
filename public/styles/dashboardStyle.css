@@ -251,7 +251,7 @@ body {
 /* ================== recent Comps List ============== */
 .details {
   position: relative;
-  width: 100%;
+  width: 850px;
   padding: 20px;
   display: grid;
   grid-gap: 30px;

@@ -155,13 +155,13 @@
 
                         <tbody>
                             <?php
-                            $data = mysqli_query($conn, "select * from comps");
+                            $data = mysqli_query($conn, "select c.title, u.username from comps c left join users u on c.created_by = u.id");
                             if(mysqli_num_rows($data) > 0) {
-                                while($row = mysqli_fetch_assoc($data)) {
+                                while($d = mysqli_fetch_assoc($data)) {
                                     ?>
                                     <tr>
                                         <td><?php echo $d['title']; ?></td>
-                                        <td><?php echo $d['created_by']; ?></td>
+                                        <td><?php echo $d['username']; ?></td>
                                     </tr>
                                     <?php
                                 }

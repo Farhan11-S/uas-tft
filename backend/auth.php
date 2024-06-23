@@ -11,7 +11,7 @@ function registerUser($conn, $username, $password)
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     // Prepare the query
-    $query = "INSERT INTO users (username, password) VALUES (?, ?)";
+    $query = "INSERT INTO users (username, password, role) VALUES (?, ?, 'user')";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("ss", $username, $hashedPassword);
 
