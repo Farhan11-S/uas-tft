@@ -1,34 +1,3 @@
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search'])) {
-    include "../../backend/main.php";
-    $search = htmlspecialchars($_POST['search']);
-    if ($search == "") {
-        $query = "SELECT * FROM traits";
-    } else {
-        $query = "SELECT * FROM traits WHERE name LIKE '%$search%'";
-    }
-
-    $data = mysqli_query($conn, $query);
-    if (mysqli_num_rows($data) > 0) {
-        while($d = mysqli_fetch_array($data)) {
-            echo "
-                <tr>
-                    <td>{$d['name']}</td>
-                    <td><img src='{$d['image_url']}' alt=''></td>
-                    <td class='action'>
-                        <a href='#' data-id='{$d['id']}' data-name='{$d['name']}' data-imgurl='{$d['image_url']}' class='btn btn-edit'>Edit</a>
-                    </td>
-                </tr>";
-        }
-    } else {
-        echo "
-            <tr class='no-data'>
-                <td colspan='3' style='text-align: center;'>No data available</td>
-            </tr>";
-    }
-    exit();
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin</title>
     <!-- ======= Styles ====== -->
-    <link rel="stylesheet" href="../../public/styles/traits.css">
+    <link rel="stylesheet" href="../../public/styles/users.css">
 </head>
 
 <body>
@@ -64,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search'])) {
                 </li>
 
                 <li>
-                    <a href="../users/usersadmin.php">
+                    <a href="usersadmin.php">
                         <span class="icon">              
                             <svg id="Layer_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><path d="m225.126 220.728c59.201 0 107.371-48.164 107.371-107.363 0-59.2-48.17-107.362-107.371-107.362-59.197 0-107.365 48.162-107.365 107.362 0 59.198 48.168 107.363 107.365 107.363zm0-198.599c50.311 0 91.236 40.929 91.236 91.235s-40.926 91.234-91.236 91.234c-50.307 0-91.233-40.928-91.233-91.234s40.926-91.235 91.233-91.235zm241.932 340.706h-15.866c-2.208-8.338-5.505-16.285-9.839-23.751l11.222-11.222c1.515-1.511 2.362-3.563 2.362-5.701 0-2.141-.848-4.19-2.362-5.701l-24.069-24.07c-3.152-3.149-8.256-3.149-11.407 0l-11.22 11.222c-7.464-4.339-15.406-7.631-23.752-9.838v-15.871c0-4.455-3.608-8.063-8.061-8.063h-34.036c-.01 0-.016.002-.018.002-24.953-15.753-53.561-24.146-83.084-24.146h-63.604c-86.27 0-156.451 70.182-156.451 156.448v54.695c0 4.453 3.609 8.064 8.065 8.064h222.102l18.547 18.545c3.028 3.03 8.385 3.021 11.406 0l11.219-11.221c7.469 4.338 15.419 7.631 23.752 9.84v15.867c0 4.455 3.607 8.063 8.066 8.063h34.035c4.452 0 8.061-3.608 8.061-8.063v-15.865c8.34-2.209 16.288-5.505 23.756-9.844l11.224 11.222c3.028 3.029 8.386 3.021 11.401 0l24.067-24.07c3.149-3.15 3.149-8.253 0-11.403l-11.222-11.221c4.334-7.464 7.631-15.414 9.839-23.75h15.866c4.458 0 8.068-3.61 8.068-8.065v-34.038c.001-4.456-3.609-8.065-8.067-8.065zm-414.056 39.309c0-77.372 62.946-140.319 140.323-140.319h63.604c26.678 0 52.537 7.639 75.035 21.989v9.957c-8.339 2.209-16.289 5.502-23.752 9.841l-11.225-11.219c-3.15-3.149-8.249-3.149-11.404 0l-24.064 24.067c-3.15 3.147-3.15 8.255 0 11.402l11.226 11.223c-4.344 7.465-7.64 15.415-9.845 23.753h-15.87c-4.455 0-8.063 3.609-8.063 8.063v34.036c0 4.455 3.607 8.065 8.063 8.065h15.869c2.205 8.343 5.501 16.291 9.837 23.752l-11.218 11.222c-.244.248-.439.528-.648.799h-207.868zm405.994-5.27h-14.229c-3.863 0-7.184 2.742-7.916 6.537-2.081 10.782-6.264 20.87-12.422 29.987-2.162 3.199-1.756 7.486.979 10.217l10.063 10.061-12.661 12.665-10.066-10.061c-2.725-2.73-7.013-3.147-10.215-.978-9.113 6.163-19.205 10.342-29.99 12.422-3.791.731-6.539 4.055-6.539 7.919v14.225h-17.908v-14.225c0-3.864-2.738-7.188-6.536-7.919-10.78-2.08-20.872-6.259-29.989-12.422-3.204-2.166-7.486-1.749-10.215.98l-10.063 10.061-12.662-12.665 10.06-10.063c2.733-2.73 3.144-7.02.977-10.219-6.157-9.104-10.339-19.192-12.423-29.987-.734-3.793-4.055-6.535-7.921-6.535h-14.222v-17.909h14.222c3.866 0 7.187-2.742 7.921-6.536 2.084-10.784 6.262-20.875 12.427-29.988 2.163-3.199 1.753-7.486-.98-10.218l-10.06-10.062 12.658-12.664 10.066 10.06c2.725 2.728 7.009 3.142 10.215.979 9.113-6.161 19.207-10.341 29.989-12.42 3.794-.734 6.536-4.056 6.536-7.919v-14.229h17.908v14.229c0 3.863 2.744 7.185 6.539 7.919 10.789 2.081 20.879 6.259 29.982 12.42 3.21 2.165 7.488 1.753 10.219-.979l10.064-10.06 12.667 12.664-10.063 10.06c-2.734 2.733-3.141 7.019-.979 10.219 6.158 9.114 10.341 19.205 12.422 29.984.732 3.797 4.053 6.539 7.916 6.539h14.229zm-101.948-66.859c-31.931 0-57.906 25.976-57.906 57.905 0 31.927 25.976 57.904 57.906 57.904 31.926 0 57.904-25.978 57.904-57.904 0-31.93-25.978-57.905-57.904-57.905zm0 99.68c-23.037 0-41.779-18.739-41.779-41.775 0-23.037 18.742-41.778 41.779-41.778 23.032 0 41.772 18.741 41.772 41.778 0 23.036-18.74 41.775-41.772 41.775z"/></svg>
                         </span>
@@ -72,8 +41,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search'])) {
                     </a>
                 </li>
 
-                <li>
-                    <a href="../users/usersstandard.php">
+                <li class='active'>
+                    <a href="usersstandard.php">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
@@ -90,8 +59,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search'])) {
                     </a>
                 </li>
 
-                <li class='active'>
-                    <a href="traits.php">
+                <li>
+                    <a href="../traits/traits.php">
                         <span class="icon">
                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 238.126 238.126" style="enable-background:new 0 0 238.126 238.126;" xml:space="preserve"><path d="M205.071,98.678c-1.194-2.728-3.891-4.49-6.869-4.49h-62.33l30.023-84.167c1.197-3.357-0.134-7.094-3.184-8.938c-3.052-1.845-6.979-1.287-9.395,1.333L34.411,131.355c-2.019,2.189-2.551,5.366-1.355,8.094c1.194,2.728,3.891,4.49,6.869,4.49h40.521c4.143,0,7.5-3.358,7.5-7.5s-3.357-7.5-7.5-7.5H57.043l82.365-89.315l-21.24,59.543c-0.818,2.297-0.432,4.849,0.974,6.842c1.405,1.993,3.73,3.178,6.169,3.178h55.772l-82.353,89.305l21.243-59.533c0.82-2.297,0.472-4.849-0.934-6.842s-3.691-3.179-6.13-3.179h-0.074c-3.525,0-6.455,2.432-7.25,5.709l-33.348,93.456c-1.198,3.357,0.133,7.094,3.183,8.938c1.205,0.729,2.547,1.083,3.878,1.083c2.039,0,4.055-0.831,5.517-2.416l118.899-128.938C205.734,104.582,206.266,101.406,205.071,98.678z"/></svg>
                         </span>
@@ -116,44 +85,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search'])) {
                 <div class="toggle">
                     <ion-icon name="menu-outline"></ion-icon>
                 </div>
-
-                <div class="search">
-                    <label>
-                    <input type="text" placeholder="Search Champion Here" id="searchInput" oninput="searchTrait()">
-                    <ion-icon name="search-outline"></ion-icon>
-                    </label>
-                </div>
-
             </div>
 
-            <!-- ================ Traits List ================= -->
+            <!-- ================ Users List ================= -->
             <div class="details">
-                <div class="traitsList"> 
+                <div class="listUsers">
                     <div class="cardHeader">
-                        <h2>Traits</h2>
+                        <h2>Users</h2>
+                        <a href="#" class="btn btn-add">Add</a>
                     </div>
 
                     <table>
                         <thead>
                             <tr>
-                                <td>Name</td>
-                                <td>Image</td>
+                                <td>Username</td>
+                                <td>Role</td>
                                 <td>Action</td>
                             </tr>
                         </thead>
                         
-                        <tbody id="traitsTable">
+                        <tbody>
                             <?php
                             include "../../backend/main.php";
-                            $data = mysqli_query($conn, "select * from traits");
+                            $data = mysqli_query($conn, "select * from users where role='user'");
                             if(mysqli_num_rows($data) > 0) {
                                 while($d = mysqli_fetch_array($data)) {
                                     ?>
                                     <tr>
-                                        <td><?php echo $d['name']; ?></td>
-                                        <td><img src="<?php echo $d['image_url']; ?>" alt="image"></td>
+                                        <td><?php echo $d['username']; ?></td>
+                                        <td><?php echo $d['role']; ?></td>
                                         <td class='action'>
-                                            <a href="#" data-id="<?php echo $d['id']; ?>" data-name="<?php echo $d['name']; ?>" data-imgurl="<?php echo $d['image_url']; ?>" class="btn btn-edit">Edit</a>
+                                            <a href="#" data-id="<?php echo $d['id']; ?>" data-username="<?php echo $d['username']; ?>" data-role="<?php echo $d['role']; ?>"  data-file="<?php echo 'usersstandard'; ?>" class="btn btn-edit">Edit</a>
+                                            <a href="#" data-id="<?php echo $d['id']; ?>" data-file="<?php echo 'usersstandard'; ?>" class="btn btn-delete">Hapus</a>
                                         </td>
                                     </tr>
                                     <?php
@@ -169,6 +132,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search'])) {
                         </tbody>
                     </table>
                 </div>
+
+                <!-- Modal ADD User -->
+                <div id="addUserModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Add New User</h2>
+                        <form method="post" action="add.php">
+                            <input type="hidden" name="filename" id="filename" value="usersstandard">
+                            <table class='addTable'>
+                                <tr>
+                                    <td>username</td>
+                                    <td><input type="text" name="username" placeholder="Masukkan username"></td>
+                                </tr>
+                                <tr>
+                                    <td>password</td>
+                                    <td><input type="text" name="password" placeholder="Masukkan password"></td>
+                                </tr>
+                                <tr>
+                                    <td>Role</td>
+                                    <td>
+                                        <select name="role" id="role">
+                                            <option value="admin">Admin</option>
+                                            <option value="user">User</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><button type="submit" class="btn btn-simpan">Save</button></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                </div>
             
                 <!-- Modal Edit User -->
                 <div id="editUserModal" class="modal">
@@ -176,15 +173,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search'])) {
                         <span class="edit-close">&times;</span>
                         <h2>Edit User</h2>
                         <form id="editUserForm" method="post" action="edit.php">
-                            <input type="hidden" name="id" id="traitId">
+                            <input type="hidden" name="id" id="userId">
+                            <input type="hidden" name="filename" id="filename">
                             <table class='editTable'>
                                 <tr>
-                                    <td>Name</td>
-                                    <td><input type="text" name="trait_name" id="trait_name"></td>
+                                    <td>Username</td>
+                                    <td><input type="text" name="username" id="username"></td>
                                 </tr>
                                 <tr>
-                                    <td>Image</td>
-                                    <td><input type="text" name="image_url" id="image_url"></td>
+                                    <td>Role</td>
+                                    <td>
+                                        <select name="role" id="role">
+                                            <option value="admin">Admin</option>
+                                            <option value="user">User</option>
+                                        </select>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td><button type="submit" class="btn btn-update">Update</button></td>
@@ -193,6 +196,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search'])) {
                             </table>
                         </form>
                     </div>
+                </div>
+                
+                <!-- Modal Konfirmasi Delete -->
+                <div id="deleteModal" class="modal">
+                <div class="modal-content">
+                    <span class="del-close">&times;</span>
+                    <p>Apakah Anda yakin ingin menghapus user ini?</p>
+                    <br>
+                    <button id="confirmDelete" class="btn btn-delete">Hapus</button>
+                    <button id="cancelDelete" class="btn btn-cancel">Batal</button>
+                </div>
                 </div>
 
             </div>
@@ -224,27 +238,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search'])) {
         };
 
         // General modal handling
-        function editUser(id, name, imgurl) {
-            document.getElementById("traitId").value = id;
-            document.getElementById("trait_name").value = name;
-            document.getElementById("image_url").value = imgurl;
+        function editUser(id, username, role,namefile) {
+            document.getElementById("userId").value = id;
+            document.getElementById("username").value = username;
+            document.getElementById("role").value = role;
+            document.getElementById("filename").value = namefile;
             var modal = document.getElementById("editUserModal"); 
             modal.style.display = "block";
         }
 
-        function handleModal(modalId, btnSelector, closeClass) {
+        function handleModal(modalId, btnSelector, closeClass, confirmClass,cancleClass) {
             var modal = document.getElementById(modalId);
             var btns = document.querySelectorAll(btnSelector);
             var span = document.getElementsByClassName(closeClass)[0];
+            var confirmDelete = document.getElementById(confirmClass);
+            var cancelDelete = document.getElementById(cancleClass);
 
             btns.forEach(function(btn) {
                 btn.onclick = function() {
                     if(modalId === "editUserModal") {
                         var id = this.getAttribute('data-id');
-                        var name = this.getAttribute('data-name');
-                        var imgurl = this.getAttribute('data-imgurl');
-                        editUser(id, name, imgurl);
+                        var username = this.getAttribute('data-username');
+                        var role = this.getAttribute('data-role');
+                        var namefile = this.getAttribute('data-file');
+                        editUser(id, username, role,namefile);
 
+                    }else if(modalId === "deleteModal") {
+                        var id = this.getAttribute('data-id');
+                        var namefile = this.getAttribute('data-file');
+                        confirmDelete.onclick = function() {
+                            window.location.href = "delete.php?id=" + id + "&filename=" + namefile;
+                        }
+
+                        cancelDelete.onclick = function() {
+                            modal.style.display = "none";
+                        }
                     }
                     modal.style.display = "block";
                 }
@@ -264,23 +292,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search'])) {
             }
         }
 
+        handleModal("addUserModal", ".btn-add", "close");
         handleModal("editUserModal", ".btn-edit", "edit-close");
-
-        function searchTrait() {
-            var input = document.getElementById('searchInput').value;
-
-            // Buat request AJAX
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    // Update konten table dengan respons dari server
-                    document.getElementById('traitsTable').innerHTML = xhr.responseText;
-                }
-            };
-            xhr.send("search=" + encodeURIComponent(input));
-        }
+        handleModal("deleteModal", ".btn-delete", "del-close", "confirmDelete", "cancelDelete");
     </script>
 
     <!-- ====== ionicons ======= -->
