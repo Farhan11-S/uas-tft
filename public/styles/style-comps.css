@@ -133,6 +133,32 @@ a {
   column-gap: 32px;
 }
 
+.my-comps .comps .card-comp .right-side .section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 12px;
+}
+
+.my-comps .comps .card-comp .right-side .traits {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+  font-size: 12px;
+  border: 1px solid #f9d978;
+  color: f9d978;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+.my-comps .comps .card-comp .right-side .traits .traits-icon {
+  width: 12px;
+  height: 12px;
+  background: #f9d978;
+}
+
 .my-comps .comps .card-comp .right-side .units {
   display: flex;
   align-items: center;

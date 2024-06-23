@@ -63,17 +63,23 @@ $list = listCompByUserID($conn, $_SESSION['id']);
         <div class="card-comp" style="margin-bottom: 8px">
           <div><?= $comp['title'] ?></div>
           <div class="right-side">
-            <div class="units">
-              <?php
-              foreach ($comp['champions'] as $key => $champ) {
-                if (!empty($key)) echo '<img src="' . $champ['image_url'] . '" class="unit" alt="' . $champ['name'] . '" />';
-              }
-              ?>
+            <div class="section">
+              <div class="traits">
+                <img src="" alt="" class="traits-icon">
+                <div class="trait-count">6</div>
+              </div>
+              <div class="units">
+                <?php
+                foreach ($comp['champions'] as $key => $champ) {
+                  if (!empty($key)) echo '<img src="' . $champ['image_url'] . '" class="unit" alt="' . $champ['name'] . '" />';
+                }
+                ?>
+              </div>
             </div>
-            <div class="action-comp">
-              <i class="fa fa-edit"></i>
-              <i class="fa fa-trash" style="color: red; margin-top: 8px"></i>
-            </div>
+          </div>
+          <div class="action-comp">
+            <i class="fa fa-edit"></i>
+            <i class="fa fa-trash" style="color: red; margin-top: 8px"></i>
           </div>
         </div>
       <?php

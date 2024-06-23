@@ -152,7 +152,7 @@ $listChampion = getChampionsWithTraits($conn);
                     foreach ($listChampion as $id => $champ) {
                     ?>
                         <div onclick="rowBuilder(<?= $id ?>)">
-                            <img src="<?= $champ['details']['image_url'] ?>" class="unit" alt="<?= $champ['details']['champion_name'] ?>" />
+                            <img src="<?= $champ['details']['image_url'] ?>" class="unit" alt="<?= $champ['details']['name'] ?>" />
                         </div>
                     <?php
                     }
