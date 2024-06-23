@@ -11,6 +11,8 @@
 </head>
 
 <body>
+
+
     <!-- =============== Navigation ================ -->
     <div class="container">
         <div class="navigation">
@@ -34,7 +36,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="./users/users.php">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
@@ -61,7 +63,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="logout.php">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>

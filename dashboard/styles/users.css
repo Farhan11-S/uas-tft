@@ -173,62 +173,6 @@ body {
   cursor: pointer;
 }
 
-/* ======================= Cards ====================== */
-.cardBox {
-  position: relative;
-  width: 100%;
-  padding: 20px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 30px;
-}
-
-.cardBox .card {
-  position: relative;
-  background: var(--white);
-  padding: 30px;
-  border-radius: 20px;
-  display: flex;
-  justify-content: space-between;
-  cursor: pointer;
-  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
-}
-
-.cardBox .card .numbers {
-  position: relative;
-  font-weight: 500;
-  font-size: 2.5rem;
-  color: var(--blue);
-}
-
-.cardBox .card .cardName {
-  color: var(--black2);
-  font-size: 1.1rem;
-  margin-top: 5px;
-}
-
-.cardBox .card .iconBx {
-  font-size: 3.5rem;
-  color: var(--black2);
-}
-
-.cardBox .card .iconBx svg {
-  width: 60px;
-  height: 45px;
-  fill: var(--black2);
-}
-
-.cardBox .card:hover {
-  background: var(--blue);
-}
-.cardBox .card:hover .numbers,
-.cardBox .card:hover .cardName,
-.cardBox .card:hover .iconBx,
-.cardBox .card:hover .iconBx svg{
-  color: var(--white);
-  fill: var(--white);
-}
-
 /* ================== recent Comps List ============== */
 .details {
   position: relative;
@@ -239,7 +183,7 @@ body {
   /* margin-top: 10px; */
 }
 
-.details .recentCompCreated {
+.details .listUsers {
   position: relative;
   display: grid;
   min-height: 100px;
@@ -275,28 +219,152 @@ body {
 .details table thead td {
   font-weight: 600;
 }
-.details .recentCompCreated table tr {
+.details .listUsers table tr {
   color: var(--black1);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
-.details .recentCompCreated table tr:last-child {
+.details .listUsers table tr:last-child {
   border-bottom: none;
 }
-.details .recentCompCreated table tbody tr:hover {
-  background: var(--blue);
-  color: var(--white);
-}
-.details .recentCompCreated table tr td {
+.details .listUsers table tr td {
   padding: 10px;
 }
-.details .recentCompCreated table tr td:last-child {
-  text-align: end;
-}
-.details .recentCompCreated table tr td:nth-child(2) {
-  text-align: end;
-}
-.details .recentCompCreated table tr td:nth-child(3) {
+.details .listUsers table tr td:last-child {
   text-align: center;
+}
+.details .listUsers table tr td:nth-child(2) {
+  text-align: center;
+}
+.details .listUsers table tr td:nth-child(3) {
+  text-align: right;
+}
+
+
+
+.action .btn,
+.modal-content .btn{
+  display: inline-block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.action .btn-edit {
+  background-color: #4CAF50; 
+}
+
+.action .btn-delete,
+.modal-content .btn-delete {
+  background-color: #f44336; 
+}
+
+.modal-content .btn-cancel {
+  background-color: grey;
+  margin-left: 10px; 
+}
+
+.action .btn:hover,
+.modal-content .btn:hover{
+  transform: translateY(-2px);
+}
+
+.action .btn-edit:hover {
+  background-color: #45a049; 
+}
+
+.action .btn-delete:hover,
+.modal-content .btn-delete:hover {
+  background-color: #e53935;
+}
+
+/* <==================== Modal Popup ========================== */
+.modal {
+  display: none;
+  position: fixed; 
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+  position: relative; 
+  background-color: #fefefe;
+  margin: 10% auto; 
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%; 
+  border-radius: 10px; 
+}
+
+.close,
+.edit-close,
+.del-close {
+  position: absolute; 
+  top: 10px; 
+  right: 20px; /* Jarak dari sisi kanan */
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus,
+.edit-close:hover,
+.edit-close:focus,
+.del-close:hover,
+.del-close:focus {
+  color: black;
+  text-decoration: none;
+}
+
+.addTable,
+.editTable {
+  width: 100%; 
+  border-collapse: collapse; 
+  margin: 20px 0;
+}
+
+.addTable td,
+.editTable td {
+  padding: 10px; 
+  border-bottom: 1px solid #ddd; 
+}
+
+.addTable input[type="text"],
+.editTable input[type="text"], select {
+  width: 100%; 
+  padding: 8px; 
+  margin: 5px 0 15px; 
+  box-sizing: border-box; 
+  border: 1px solid #ccc; 
+  border-radius: 4px; 
+}
+
+.btn-simpan,
+.btn-update {
+  background-color: #4CAF50; 
+  color: white; 
+  padding: 10px 20px; 
+  border: none; 
+  border-radius: 4px; 
+  cursor: pointer; 
+  float: left; 
+}
+
+.btn-simpan:hover,
+.btn-update:hover {
+  background-color: #45a049; 
 }
 
 /* ====================== Responsive Design ========================== */
@@ -324,7 +392,7 @@ body {
   .details {
     grid-template-columns: 1fr;
   }
-  .recentCompCreated {
+  .listUsers {
     overflow-x: auto;
   }
   .status.inProgress {
