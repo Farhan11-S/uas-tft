@@ -1,5 +1,4 @@
 <?php
-session_start();
 // Include the database connection file
 require_once 'main.php';
 require_once 'helper.php';
@@ -73,6 +72,7 @@ if (isset($_POST['login'])) {
         $_SESSION['id'] = $user['id'];
         $_SESSION['username'] = $username;
         $_SESSION['status'] = "login";
+        $_SESSION['role'] = $user['role'];
 
         if ($user['role'] == 'admin') {
             header("location:../dashboard/index.php");
