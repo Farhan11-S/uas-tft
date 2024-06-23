@@ -1,5 +1,8 @@
 <?php
-session_start();
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
 // Include the database connection file
 require_once 'main.php';
 require_once 'helper.php';

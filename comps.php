@@ -1,7 +1,10 @@
 <?php
 
 require_once 'backend/my_comp.php';
-session_start();
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+}
 if (!isset($_SESSION['username'])) header("location:./auth/sign-in.php");
 
 

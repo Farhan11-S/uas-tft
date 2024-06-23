@@ -2,7 +2,10 @@
 // Include the database connection file
 require_once 'main.php';
 require_once 'helper.php';
-session_start();
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
 
 // Function to register a new user
 function registerUser($conn, $username, $password)

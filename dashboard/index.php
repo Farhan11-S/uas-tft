@@ -14,7 +14,10 @@
 
     <?php
     include '../backend/main.php';
-    session_start();
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
     if (!isset($_SESSION['role']) && $_SESSION['role'] != 'admin') header("location:../auth/sign-in.php");
 
     ?>
