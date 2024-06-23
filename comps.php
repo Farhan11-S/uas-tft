@@ -1,7 +1,10 @@
 <?php
 
+require_once 'backend/my_comp.php';
 session_start();
 if (!isset($_SESSION['username'])) header("location:./auth/sign-in.php");
+
+$list = listCompByUserID($conn, $_SESSION['id']);
 
 ?>
 <!DOCTYPE html>
@@ -30,42 +33,47 @@ if (!isset($_SESSION['username'])) header("location:./auth/sign-in.php");
       </a>
     </div>
     <hr />
-    <div class="empty-comps">
-      <div class="title">Create TFT Comps</div>
-      <div class="desc">
-        This platform allows you to create the best composition for TFT games
-        with ease. Click 'Start Building' to begin creating your team
-        composition.
+    <?php
+    if (empty($list)) {
+    ?>
+      <div class="empty-comps">
+        <div class="title">Create TFT Comps</div>
+        <div class="desc">
+          This platform allows you to create the best composition for TFT games
+          with ease. Click 'Start Building' to begin creating your team
+          composition.
+        </div>
+        <a href="#create-comp" class="button-create-comp">
+          <i class="fa fa-plus"></i>
+          <div>Start Building</div>
+        </a>
       </div>
-      <a href="#create-comp" class="button-create-comp">
-        <i class="fa fa-plus"></i>
-        <div>Start Building</div>
-      </a>
-    </div>
+    <?php
+    }
+    ?>
     <div class="comps">
-      <div class="card-comp">
-        <div>Reaper Kayn</div>
-        <div class="right-side">
-          <div class="units">
-            <img src="" class="unit" alt="unit" />
-            <img src="" class="unit" alt="unit" />
-            <img src="" class="unit" alt="unit" />
-            <img src="" class="unit" alt="unit" />
-            <img src="" class="unit" alt="unit" />
-            <img src="" class="unit" alt="unit" />
-            <img src="" class="unit" alt="unit" />
-            <img src="" class="unit" alt="unit" />
-            <img src="" class="unit" alt="unit" />
-            <img src="" class="unit" alt="unit" />
-            <img src="" class="unit" alt="unit" />
-            <img src="" class="unit" alt="unit" />
-          </div>
-          <div class="action-comp">
-            <i class="fa fa-edit"></i>
-            <i class="fa fa-trash" style="color: red; margin-top: 8px"></i>
+      <?php
+      foreach ($list as $comp) {
+      ?>
+        <div class="card-comp" style="margin-bottom: 8px">
+          <div><?= $comp['title'] ?></div>
+          <div class="right-side">
+            <div class="units">
+              <?php
+              foreach ($comp['champions'] as $key => $champ) {
+                if(!empty($key)) echo '<img src="' . $champ['image_url'] . '" class="unit" alt="unit" />';
+              }
+              ?>
+            </div>
+            <div class="action-comp">
+              <i class="fa fa-edit"></i>
+              <i class="fa fa-trash" style="color: red; margin-top: 8px"></i>
+            </div>
           </div>
         </div>
-      </div>
+      <?php
+      }
+      ?>
     </div>
   </div>
 </body>

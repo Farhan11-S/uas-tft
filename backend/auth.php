@@ -69,6 +69,7 @@ if (isset($_POST['login'])) {
 
     if ($user) {
         // Login successful, you can use the user data here
+        $_SESSION['id'] = $user['id'];
         $_SESSION['username'] = $username;
         $_SESSION['status'] = "login";
         header("location:../comps.php");
