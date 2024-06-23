@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Include the database connection file
 require_once 'main.php';
 require_once 'helper.php';
@@ -54,6 +55,7 @@ if (isset($_POST['register'])) {
     $password = $_POST['password'];
 
     echo registerUser($conn, $username, $password);
+    header("location:../index.php");
 }
 
 if (isset($_POST['login'])) {
@@ -64,7 +66,14 @@ if (isset($_POST['login'])) {
 
     if ($user) {
         // Login successful, you can use the user data here
-        echo messageBuilder('Login Success');
+        if($user['role'] == 'admin'){
+            echo messageBuilder('Login Success Admin');
+            $_SESSION['role'] = "admin";
+            $_SESSION['status'] = "login";
+            header("location:../dashboard/index.php");
+        }else{
+            echo messageBuilder('Login Success User');
+        }
     } else {
         // Login failed
         echo messageBuilder('Invalid username or password');

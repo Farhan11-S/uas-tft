@@ -173,17 +173,16 @@ body {
   cursor: pointer;
 }
 
-/* ================== recent Comps List ============== */
+/* ================== Champions List ============== */
 .details {
   position: relative;
   width: 100%;
   padding: 20px;
   display: grid;
   grid-gap: 30px;
-  /* margin-top: 10px; */
 }
 
-.details .listUsers {
+.details .championsList {
   position: relative;
   display: grid;
   min-height: 100px;
@@ -219,24 +218,30 @@ body {
 .details table thead td {
   font-weight: 600;
 }
-.details .listUsers table tr {
+.details .championsList table tr {
   color: var(--black1);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
-.details .listUsers table tr:last-child {
+.details .championsList table tr:last-child {
   border-bottom: none;
 }
-.details .listUsers table tr td {
+.details .championsList table tr td {
   padding: 10px;
 }
-.details .listUsers table tr td:last-child {
+.details .championsList table tr td:last-child {
   text-align: center;
 }
-.details .listUsers table tr td:nth-child(2) {
+.details .championsList table tr td:nth-child(2) {
   text-align: center;
 }
-.details .listUsers table tr td:nth-child(3) {
-  text-align: right;
+.details .championsList table tr td:nth-child(3) {
+  text-align: center;
+}
+.details .championsList table tr td:nth-child(4) {
+  text-align: center;
+}
+.details .championsList table tr td img{
+  width: 80px;
 }
 
 
@@ -391,7 +396,7 @@ body {
   .details {
     grid-template-columns: 1fr;
   }
-  .listUsers {
+  .championsList {
     overflow-x: auto;
   }
   .status.inProgress {

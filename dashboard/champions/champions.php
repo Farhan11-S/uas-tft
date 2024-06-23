@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin</title>
     <!-- ======= Styles ====== -->
-    <link rel="stylesheet" href="../styles/users.css">
+    <link rel="stylesheet" href="../styles/champions.css">
 </head>
 
 <body>
@@ -33,8 +33,8 @@
                     </a>
                 </li>
 
-                <li class='active'>
-                    <a href="./users.php">
+                <li>
+                    <a href="../users/users.php">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
@@ -42,8 +42,8 @@
                     </a>
                 </li>
 
-                <li>
-                    <a href="../champions/champions.php">
+                <li class='active'>
+                    <a href="champions.php">
                         <span class="icon">
                         <svg enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m397.983 123.585c-23.074-28.708-54.562-49.876-89.566-60.417l7.693-24.3c2.337-7.384-1.331-15.333-8.467-18.346l-45.809-19.341c-3.729-1.575-7.939-1.575-11.668 0l-45.809 19.341c-7.136 3.013-10.804 10.962-8.467 18.346l7.693 24.3c-34.998 10.539-66.48 31.701-89.554 60.401-25.856 32.164-40.097 72.647-40.097 113.993v228.51c0 6.581 4.29 12.394 10.579 14.333l100.265 30.927c4.549 1.403 9.495.564 13.328-2.265 3.832-2.828 6.093-7.307 6.093-12.069v-18.916h103.605v18.918c0 4.762 2.261 9.241 6.093 12.069 2.611 1.927 5.739 2.932 8.908 2.931 1.48 0 2.971-.219 4.42-.667l100.265-30.927c6.289-1.939 10.579-7.752 10.579-14.333v-228.51c.001-41.339-14.235-81.817-40.084-113.978zm-141.983-92.303 27.384 11.562-27.384 86.502-27.384-86.502zm-51.803 416.802v-58.958c0-6.581-4.29-12.394-10.579-14.333l-23.344-7.2v-95.693l35.802 8.334v47.353c0 8.284 6.716 15 15 15h69.848c8.284 0 15-6.716 15-15v-47.353l35.802-8.334v95.692l-23.344 7.2c-6.289 1.939-10.579 7.752-10.579 14.333v58.958h-103.606zm203.871 6.919-70.265 21.673v-76.479l23.344-7.2c6.289-1.939 10.579-7.752 10.579-14.333v-125.657c0-4.576-2.089-8.902-5.673-11.748s-8.276-3.9-12.728-2.862l-65.803 15.318c-6.792 1.581-11.599 7.635-11.599 14.609v44.262h-39.848v-44.262c0-6.974-4.807-13.028-11.599-14.609l-65.803-15.318c-4.453-1.038-9.142.016-12.728 2.862-3.584 2.845-5.673 7.171-5.673 11.748v125.656c0 6.582 4.29 12.394 10.579 14.333l23.344 7.2v76.479l-70.265-21.673v-217.44c0-35.035 11.576-67.953 33.479-95.196 19.377-24.103 45.837-41.836 75.228-50.591l29.06 91.799c1.974 6.235 7.761 10.473 14.301 10.473s12.327-4.238 14.301-10.473l29.06-91.799c29.397 8.757 55.861 26.494 75.239 50.604 21.895 27.241 33.468 60.155 33.468 95.184v217.44z"/></g></svg>
                         </span>
@@ -79,19 +79,20 @@
                 </div>
             </div>
 
-            <!-- ================ Users List ================= -->
+            <!-- ================ Champions List ================= -->
             <div class="details">
-                <div class="listUsers">
+                <div class="championsList">
                     <div class="cardHeader">
-                        <h2>Users</h2>
-                        <a href="#" class="btn btn-add">Add</a>
+                        <h2>Champions</h2>
                     </div>
 
                     <table>
                         <thead>
                             <tr>
-                                <td>Username</td>
-                                <td>Role</td>
+                                <td>Api Name</td>
+                                <td>Name</td>
+                                <td>Cost</td>
+                                <td>Image</td>
                                 <td>Action</td>
                             </tr>
                         </thead>
@@ -99,16 +100,17 @@
                         <tbody>
                             <?php
                             include "../../backend/main.php";
-                            $data = mysqli_query($conn, "select * from users");
+                            $data = mysqli_query($conn, "select * from champions");
                             if(mysqli_num_rows($data) > 0) {
                                 while($d = mysqli_fetch_array($data)) {
                                     ?>
                                     <tr>
-                                        <td><?php echo $d['username']; ?></td>
-                                        <td><?php echo $d['role']; ?></td>
+                                        <td><?php echo $d['api_name']; ?></td>
+                                        <td><?php echo $d['name']; ?></td>
+                                        <td><?php echo $d['cost']; ?></td>
+                                        <td><img src="<?php echo $d['image_url']; ?>" alt=""></td>
                                         <td class='action'>
-                                            <a href="#" data-id="<?php echo $d['id']; ?>" data-username="<?php echo $d['username']; ?>" data-role="<?php echo $d['role']; ?>" class="btn btn-edit">Edit</a>
-                                            <a href="#" data-id="<?php echo $d['id']; ?>" class="btn btn-delete">Hapus</a>
+                                            <a href="#" data-id="<?php echo $d['id']; ?>" data-apiname="<?php echo $d['api_name']; ?>" data-name="<?php echo $d['name']; ?>" data-cost="<?php echo $d['cost']; ?> " data-imgurl="<?php echo $d['image_url']; ?>" class="btn btn-edit">Edit</a>
                                         </td>
                                     </tr>
                                     <?php
@@ -116,46 +118,13 @@
                             } else {
                                 ?>
                                     <tr class="no-data">
-                                        <td colspan="3" style="text-align: center;">No data available</td>
+                                        <td colspan="5" style="text-align: center;">No data available</td>
                                     </tr>
                                     <?php
                             }
                             ?>
                         </tbody>
                     </table>
-                </div>
-
-                <!-- Modal ADD User -->
-                <div id="addUserModal" class="modal">
-                    <div class="modal-content">
-                        <span class="close">&times;</span>
-                        <h2>Add New User</h2>
-                        <form method="post" action="add.php">
-                            <table class='addTable'>
-                                <tr>
-                                    <td>username</td>
-                                    <td><input type="text" name="username" placeholder="Masukkan username"></td>
-                                </tr>
-                                <tr>
-                                    <td>password</td>
-                                    <td><input type="text" name="password" placeholder="Masukkan password"></td>
-                                </tr>
-                                <tr>
-                                    <td>Role</td>
-                                    <td>
-                                        <select name="role" id="role">
-                                            <option value="admin">Admin</option>
-                                            <option value="user">User</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><button type="submit" class="btn btn-simpan">Save</button></td>
-                                    <td></td>
-                                </tr>
-                            </table>
-                        </form>
-                    </div>
                 </div>
             
                 <!-- Modal Edit User -->
@@ -164,20 +133,23 @@
                         <span class="edit-close">&times;</span>
                         <h2>Edit User</h2>
                         <form id="editUserForm" method="post" action="edit.php">
-                            <input type="hidden" name="id" id="userId">
+                            <input type="hidden" name="id" id="championId">
                             <table class='editTable'>
                                 <tr>
-                                    <td>Username</td>
-                                    <td><input type="text" name="username" id="username"></td>
+                                    <td>API name</td>
+                                    <td><input readonly type="text" name="api_name" id="api_name"></td>
                                 </tr>
                                 <tr>
-                                    <td>Role</td>
-                                    <td>
-                                        <select name="role" id="role">
-                                            <option value="admin">Admin</option>
-                                            <option value="user">User</option>
-                                        </select>
-                                    </td>
+                                    <td>Name</td>
+                                    <td><input type="text" name="name_champion" id="name_champion"></td>
+                                </tr>
+                                <tr>
+                                    <td>Cost</td>
+                                    <td><input type="text" name="cost" id="cost"></td>
+                                </tr>
+                                <tr>
+                                    <td>Image</td>
+                                    <td><input type="text" name="image_url" id="image_url"></td>
                                 </tr>
                                 <tr>
                                     <td><button type="submit" class="btn btn-update">Update</button></td>
@@ -186,17 +158,6 @@
                             </table>
                         </form>
                     </div>
-                </div>
-                
-                <!-- Modal Konfirmasi Delete -->
-                <div id="deleteModal" class="modal">
-                <div class="modal-content">
-                    <span class="del-close">&times;</span>
-                    <p>Apakah Anda yakin ingin menghapus user ini?</p>
-                    <br>
-                    <button id="confirmDelete" class="btn btn-delete">Hapus</button>
-                    <button id="cancelDelete" class="btn btn-cancel">Batal</button>
-                </div>
                 </div>
 
             </div>
@@ -228,39 +189,31 @@
         };
 
         // General modal handling
-        function editUser(id, username, role) {
-            document.getElementById("userId").value = id;
-            document.getElementById("username").value = username;
-            document.getElementById("role").value = role;
+        function editUser(id, name, cost, apiname, imgurl) {
+            document.getElementById("championId").value = id;
+            document.getElementById("name_champion").value = name;
+            document.getElementById("api_name").value = apiname;
+            document.getElementById("cost").value = cost;
+            document.getElementById("image_url").value = imgurl;
             var modal = document.getElementById("editUserModal"); 
             modal.style.display = "block";
         }
 
-        function handleModal(modalId, btnSelector, closeClass, confirmClass,cancleClass) {
+        function handleModal(modalId, btnSelector, closeClass) {
             var modal = document.getElementById(modalId);
             var btns = document.querySelectorAll(btnSelector);
             var span = document.getElementsByClassName(closeClass)[0];
-            var confirmDelete = document.getElementById(confirmClass);
-            var cancelDelete = document.getElementById(cancleClass);
 
             btns.forEach(function(btn) {
                 btn.onclick = function() {
                     if(modalId === "editUserModal") {
                         var id = this.getAttribute('data-id');
-                        var username = this.getAttribute('data-username');
-                        var role = this.getAttribute('data-role');
-                        editUser(id, username, role);
+                        var name = this.getAttribute('data-name');
+                        var cost = this.getAttribute('data-cost');
+                        var apiname = this.getAttribute('data-apiname');
+                        var imgurl = this.getAttribute('data-imgurl');
+                        editUser(id, name, cost, apiname, imgurl);
 
-                    }else if(modalId === "deleteModal") {
-                        var id = this.getAttribute('data-id');
-
-                        confirmDelete.onclick = function() {
-                            window.location.href = "delete.php?id=" + id;
-                        }
-
-                        cancelDelete.onclick = function() {
-                            modal.style.display = "none";
-                        }
                     }
                     modal.style.display = "block";
                 }
@@ -280,9 +233,7 @@
             }
         }
 
-        handleModal("addUserModal", ".btn-add", "close");
         handleModal("editUserModal", ".btn-edit", "edit-close");
-        handleModal("deleteModal", ".btn-delete", "del-close", "confirmDelete", "cancelDelete");
     </script>
 
     <!-- ====== ionicons ======= -->
