@@ -33,7 +33,7 @@ $list = listCompByUserID($conn, $_SESSION['id']);
   <div class="my-comps">
     <div class="header-comps">
       <div>My Comps</div>
-      <a href="#create-comp" class="button-create-comp">
+      <a href="./create-comp.php" class="button-create-comp">
         <i class="fa fa-plus"></i>
         <div>Create</div>
       </a>
@@ -49,7 +49,7 @@ $list = listCompByUserID($conn, $_SESSION['id']);
           with ease. Click 'Start Building' to begin creating your team
           composition.
         </div>
-        <a href="#create-comp" class="button-create-comp">
+        <a href="./create-comp.php" class="button-create-comp">
           <i class="fa fa-plus"></i>
           <div>Start Building</div>
         </a>
