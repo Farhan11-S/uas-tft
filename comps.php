@@ -4,7 +4,11 @@ require_once 'backend/my_comp.php';
 session_start();
 if (!isset($_SESSION['username'])) header("location:./auth/sign-in.php");
 
-$list = listCompByUserID($conn, $_SESSION['id']);
+
+$list = getCompsWithChampionsAndTraits($conn, $_SESSION['id']);
+// header('Content-Type: application/json');
+// echo json_encode($list);
+// die;
 
 ?>
 <!DOCTYPE html>
@@ -65,8 +69,12 @@ $list = listCompByUserID($conn, $_SESSION['id']);
           <div class="right-side">
             <div class="section">
               <div class="traits">
-                <img src="" alt="" class="traits-icon">
-                <div class="trait-count">6</div>
+                <?php
+                foreach ($comp['traits'] as $key => $trait) {
+                  if (!empty($trait['value'])) echo '<img src="' . $trait['image_url'] . '" class="traits-icon" alt="' . $trait['name'] . '" />';
+                  if (!empty($trait['value'])) echo '<div class="trait-count">' . $trait['value'] . '</div>';
+                }
+                ?>
               </div>
               <div class="units">
                 <?php

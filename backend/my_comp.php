@@ -4,50 +4,35 @@ session_start();
 require_once 'main.php';
 require_once 'helper.php';
 
-function listCompByUserID($conn, $userID)
+function getCompsWithChampionsAndTraits($conn, $userId)
 {
-
+    // Query to get comps with champions
     $sql = "
-SELECT
-    c.id AS comp_id,
-    c.title AS comp_title,
-    champ.id AS champion_id,
-    champ.name AS champion_name,
-    champ.api_name AS champion_api_name,
-    champ.cost AS champion_cost,
-    champ.image_url AS champion_image_url,
-    t.id AS trait_id,
-    t.name AS trait_name,
-    t.min_units AS trait_min_units,
-    t.max_units AS trait_max_units,
-    t.image_url AS trait_image_url
-FROM
-    comps c
-    LEFT JOIN comp_champion_details ccd ON c.id = ccd.id_comp
-    LEFT JOIN champions champ ON ccd.id_champion = champ.id
-    LEFT JOIN champion_traits ct ON champ.id = ct.champion_id
-    LEFT JOIN traits t ON ct.trait_id = t.id
-WHERE
-    c.created_by = ?
-ORDER BY
-    c.id, champ.id, t.id;
-";
+        SELECT 
+            c.id as comp_id,
+            c.title as comp_title,
+            ch.id as champion_id,
+            ch.api_name as champion_api_name,
+            ch.name as champion_name,
+            ch.cost as champion_cost,
+            ch.image_url as champion_image_url
+        FROM comps c
+        LEFT JOIN comp_champion_details ccd ON c.id = ccd.id_comp
+        LEFT JOIN champions ch ON ccd.id_champion = ch.id
+        WHERE c.created_by = $userId
+        ORDER BY c.id, ch.id
+    ";
 
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $userID);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $result = $conn->query($sql);
 
     $comps = [];
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             $compId = $row['comp_id'];
             $championId = $row['champion_id'];
-            $traitId = $row['trait_id'];
 
             if (!isset($comps[$compId])) {
                 $comps[$compId] = [
-                    'id' => $compId,
                     'title' => $row['comp_title'],
                     'champions' => []
                 ];
@@ -55,29 +40,57 @@ ORDER BY
 
             if (!isset($comps[$compId]['champions'][$championId])) {
                 $comps[$compId]['champions'][$championId] = [
-                    'id' => $championId,
-                    'name' => $row['champion_name'],
                     'api_name' => $row['champion_api_name'],
+                    'name' => $row['champion_name'],
                     'cost' => $row['champion_cost'],
                     'image_url' => $row['champion_image_url'],
-                    'traits' => []
-                ];
-            }
-
-            if ($traitId) {
-                $comps[$compId]['champions'][$championId]['traits'][] = [
-                    'id' => $traitId,
-                    'name' => $row['trait_name'],
-                    'min_units' => $row['trait_min_units'],
-                    'max_units' => $row['trait_max_units'],
-                    'image_url' => $row['trait_image_url']
                 ];
             }
         }
     }
 
-    $stmt->close();
-    // $conn->close();
+    // Query to get comps with champions
+    $sql = "
+    SELECT 
+        c.id as comp_id,
+        c.title as comp_title,
+        t.id as trait_id,
+        t.name as trait_name,
+        t.image_url as trait_image_url,
+        ctd.value as trait_value
+    FROM comps c
+    LEFT JOIN comp_trait_details ctd ON c.id = ctd.id_comp
+    LEFT JOIN traits t ON ctd.id_trait = t.id
+    WHERE c.created_by = 1
+    ORDER BY c.id, ctd.value DESC
+    ";
+
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $compId = $row['comp_id'];
+            $traitId = $row['trait_id'];
+
+            if (!isset($comps[$compId])) {
+                $comps[$compId] = [
+                    'title' => $row['comp_title'],
+                    'champions' => []
+                ];
+            }
+
+            if (!isset($comps[$compId]['traits'][$traitId])) {
+                $comps[$compId]['traits'][$traitId] = [
+                    'name' => $row['trait_name'],
+                    'image_url' => $row['trait_image_url'],
+                    'value' => $row['trait_value'],
+                ];
+            }
+        }
+    }
+
+    $conn->close();
+
     return $comps;
 }
 
