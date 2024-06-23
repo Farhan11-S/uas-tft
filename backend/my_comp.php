@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Include the database connection file
 require_once 'main.php';
 require_once 'helper.php';
@@ -76,11 +77,11 @@ ORDER BY
     }
 
     $stmt->close();
-    $conn->close();
+    // $conn->close();
     return $comps;
 }
 
-function getChampionsWithTraits($conn, $championIds)
+function getChampionsWithTraits($conn, $championIds = [])
 {
 
     if ($conn->connect_error) {
@@ -108,7 +109,7 @@ function getChampionsWithTraits($conn, $championIds)
         LEFT JOIN traits t ON ct.trait_id = t.id
     ";
 
-    if (!empty($championIds)) $sql = $sql . ' WHERE c.id IN ($championIds)';
+    if (!empty($championIds)) $sql = $sql . " WHERE c.id IN ($championIds)";
 
     $result = $conn->query($sql);
 
@@ -131,7 +132,7 @@ function getChampionsWithTraits($conn, $championIds)
         }
     }
 
-    $conn->close();
+    // $conn->close();
 
     return $champions;
 }
@@ -185,5 +186,14 @@ function storeComp($conn, $championIds, $compTitle, $compCreatedBy)
         throw $e;
     }
 
-    $conn->close();
+    // $conn->close();
+}
+
+if (isset($_POST['store'])) {
+    $idChampions = $_POST['id_champions'];
+    $compTitle = $_POST['title'];
+
+    storeComp($conn, $idChampions, $compTitle, $_SESSION['id']);
+
+    header("location:../comps.php");
 }

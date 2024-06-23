@@ -2,7 +2,6 @@
 
 require_once 'backend/my_comp.php';
 session_start();
-session_destroy();
 if (!isset($_SESSION['username'])) header("location:./auth/sign-in.php");
 
 $list = listCompByUserID($conn, $_SESSION['id']);
@@ -67,7 +66,7 @@ $list = listCompByUserID($conn, $_SESSION['id']);
             <div class="units">
               <?php
               foreach ($comp['champions'] as $key => $champ) {
-                if(!empty($key)) echo '<img src="' . $champ['image_url'] . '" class="unit" alt="unit" />';
+                if (!empty($key)) echo '<img src="' . $champ['image_url'] . '" class="unit" alt="' . $champ['name'] . '" />';
               }
               ?>
             </div>
