@@ -19,7 +19,7 @@
           spirits you encounter here will bestow unique powers and paths to
           victory… if you’re willing to take the risk of asking for their favor.
         </div>
-        <a href="./auth/sign-in.html">
+        <a href="./auth/sign-in.php">
             <div class="button-sign-in">sign in</div>
         </a>
       </div>

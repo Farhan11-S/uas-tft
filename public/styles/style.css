@@ -138,3 +138,7 @@ form button {
   color: #fff;
   background: #D23538;
 }
+
+.text-red-600 {
+  color: rgb(220 38 38);
+}
