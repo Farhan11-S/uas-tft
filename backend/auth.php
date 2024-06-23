@@ -3,6 +3,7 @@ session_start();
 // Include the database connection file
 require_once 'main.php';
 require_once 'helper.php';
+session_start();
 
 // Function to register a new user
 function registerUser($conn, $username, $password)
@@ -16,10 +17,10 @@ function registerUser($conn, $username, $password)
     $stmt->bind_param("ss", $username, $hashedPassword);
 
     if (!$stmt->execute()) {
-        return messageBuilder($stmt->error, 0);
+        return messageBuilder($stmt->error, [], 0);
     }
 
-    return messageBuilder('Register Success');
+    return messageBuilder('Register Success', []);
 }
 
 // Function to login a user
@@ -48,14 +49,17 @@ function loginUser($conn, $username, $password)
     return null;
 }
 
-header('Content-Type: application/json; charset=utf-8');
 // Example usage
 if (isset($_POST['register'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    echo registerUser($conn, $username, $password);
-    header("location:../index.php");
+    $res = registerUser($conn, $username, $password);
+    if ($res['success']) {
+        header("location:../auth/sign-in.php?afterRegistration=1");
+    } else {
+        header("location:../auth/sign-up.php?error=" . $res['message']);
+    }
 }
 
 if (isset($_POST['login'])) {
@@ -66,16 +70,25 @@ if (isset($_POST['login'])) {
 
     if ($user) {
         // Login successful, you can use the user data here
-        if($user['role'] == 'admin'){
-            echo messageBuilder('Login Success Admin');
-            $_SESSION['role'] = "admin";
-            $_SESSION['status'] = "login";
+        $_SESSION['id'] = $user['id'];
+        $_SESSION['username'] = $username;
+        $_SESSION['status'] = "login";
+
+        if ($user['role'] == 'admin') {
             header("location:../dashboard/index.php");
-        }else{
-            echo messageBuilder('Login Success User');
+        } else {
+            header("location:../comps.php");
         }
     } else {
         // Login failed
-        echo messageBuilder('Invalid username or password');
+        header("location:../auth/sign-in.php?error=1");
     }
+}
+
+if (isset($_POST['logout'])) {
+    // menghapus semua session
+    session_destroy();
+
+    // mengalihkan halaman sambil mengirim pesan logout
+    header("location:../index.php?pesan=logout");
 }

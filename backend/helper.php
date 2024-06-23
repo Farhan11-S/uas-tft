@@ -1,9 +1,10 @@
 <?php
 
-function messageBuilder($message, $success = 1)
+function messageBuilder($message, $data, $success = 1)
 {
-    return json_encode([
+    return [
         'success' => $success,
         'message' => $message,
-    ]);
+        'data' => $data,
+    ];
 }

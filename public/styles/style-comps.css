@@ -1,0 +1,155 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+:root {
+  --bg: #212529;
+  --darkGray: #343a40;
+}
+
+body {
+  margin: 0;
+  padding: 55px 200px;
+  font-family: "Outfit", sans-serif;
+  background: var(--bg);
+  color: #fff;
+}
+
+*:focus {
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header .left-side {
+  display: flex;
+  align-items: center;
+  column-gap: 28px;
+  font-size: 32px;
+}
+
+.header .left-side .avatar {
+  border-radius: 100%;
+  width: 70px;
+  height: 70px;
+}
+
+.header .button-logout {
+  padding: 8px 18px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--darkGray);
+  color: #fff;
+  font-size: 24px;
+}
+
+.my-comps {
+  width: 100%;
+  margin-top: 70px;
+}
+
+.my-comps .header-comps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.my-comps .header-comps .button-create-comp {
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
+  font-size: 18px;
+  background: var(--darkGray);
+  color: #fff;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.my-comps hr {
+  border: 3px solid var(--darkGray);
+  margin: 22px 0px;
+}
+
+.my-comps .empty-comps {
+  margin-top: 120px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.my-comps .empty-comps .title {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.my-comps .empty-comps .desc {
+  width: 550px;
+  text-wrap: wrap;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.my-comps .empty-comps .button-create-comp {
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
+  font-size: 18px;
+  cursor: pointer;
+  color: #f9d978;
+}
+
+.my-comps .comps {
+  margin: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  column-gap: 12px;
+}
+
+.my-comps .comps .card-comp {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 36px;
+  background: var(--darkGray);
+  font-size: 24px;
+  border-radius: 12px;
+}
+
+.my-comps .comps .card-comp .right-side {
+  display: flex;
+  align-items: center;
+  column-gap: 32px;
+}
+
+.my-comps .comps .card-comp .right-side .units {
+  display: flex;
+  align-items: center;
+  column-gap: 18px;
+}
+
+.my-comps .comps .card-comp .right-side .units img {
+  background: var(--bg);
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+}
+
+.my-comps .comps .card-comp .action-comp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+}
