@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 21, 2024 at 06:05 PM
+-- Generation Time: Jun 23, 2024 at 11:52 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -91,7 +91,7 @@ INSERT INTO `champions` (`id`, `api_name`, `name`, `cost`, `image_url`) VALUES
 (49, 'TFT11_Yorick', 'Yorick', 2, 'https://raw.communitydragon.org/latest/game/assets/ux/tft/championsplashes/tft11_yorick_mobile.png'),
 (50, 'TFT11_Zoe', 'Zoe', 3, 'https://raw.communitydragon.org/latest/game/assets/ux/tft/championsplashes/tft11_zoe_mobile.png'),
 (51, 'TFT11_Zyra', 'Zyra', 2, 'https://raw.communitydragon.org/latest/game/assets/ux/tft/championsplashes/tft11_zyra_mobile.png'),
-(52, 'TFT11_FortuneYord', 'Kobuko', 1, 'https://raw.communitydragon.org/latest/game/assets/ux/tft/championsplashes/tft11_fortuneyord_mobile.png'),
+(52, 'TFT11_FortuneYord', 'Kobuko', 1, 'https://raw.communitydragon.org/latest/game/assets/ux/tft/championsplashes/tft11_kobuko_mobile.png'),
 (53, 'TFT11_RekSai', 'Rek\'Sai', 1, 'https://raw.communitydragon.org/latest/game/assets/ux/tft/championsplashes/tft11_reksai_mobile.png'),
 (54, 'TFT11_Xayah', 'Xayah', 5, 'https://raw.communitydragon.org/latest/game/assets/ux/tft/championsplashes/tft11_xayah_mobile.png'),
 (55, 'TFT11_Gnar', 'Gnar', 2, 'https://raw.communitydragon.org/latest/game/assets/ux/tft/championsplashes/tft11_gnar_mobile.png'),
@@ -99,8 +99,7 @@ INSERT INTO `champions` (`id`, `api_name`, `name`, `cost`, `image_url`) VALUES
 (57, 'TFT11_Jax', 'Jax', 1, 'https://raw.communitydragon.org/latest/game/assets/ux/tft/championsplashes/tft11_jax_mobile.png'),
 (58, 'TFT11_Diana', 'Diana', 3, 'https://raw.communitydragon.org/latest/game/assets/ux/tft/championsplashes/tft11_diana_mobile.png'),
 (59, 'TFT11_Azir', 'Azir', 5, 'https://raw.communitydragon.org/latest/game/assets/ux/tft/championsplashes/tft11_azir_mobile.png'),
-(60, 'TFT11_Nautilus', 'Nautilus', 4, 'https://raw.communitydragon.org/latest/game/assets/ux/tft/championsplashes/tft11_nautilus_mobile.png'),
-(61, 'TFT11_XayahRakanDummy', 'Xayah & Rakan', 5, 'https://raw.communitydragon.org/latest/game/assets/ux/tft/championsplashes/tft11_xayahrakandummy_mobile.png');
+(60, 'TFT11_Nautilus', 'Nautilus', 4, 'https://raw.communitydragon.org/latest/game/assets/ux/tft/championsplashes/tft11_nautilus_mobile.png');
 
 -- --------------------------------------------------------
 
@@ -250,10 +249,7 @@ INSERT INTO `champion_traits` (`id`, `champion_id`, `trait_id`) VALUES
 (129, 59, 7),
 (130, 59, 21),
 (131, 60, 24),
-(132, 60, 26),
-(133, 61, 3),
-(134, 61, 17),
-(135, 61, 5);
+(132, 60, 26);
 
 -- --------------------------------------------------------
 
@@ -313,29 +309,28 @@ CREATE TABLE `traits` (
 INSERT INTO `traits` (`id`, `name`, `min_units`, `max_units`, `image_url`) VALUES
 (1, 'Ghostly', '2,4,6,8', '3,5,7,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_ghostly.png'),
 (2, 'Fortune', '3,5,7', '4,6,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_fortune.png'),
-(3, 'Lovers', '1', '1', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_lovers.png'),
+(3, 'Lovers', '1', '25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_lovers.png'),
 (4, 'Reaper', '2,4', '3,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_reaper.png'),
-(5, 'Trickshot/Altruist', '1', '25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_trickshot/altruist.png'),
 (6, 'Umbral', '2,4,6,9', '3,5,8,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_umbral.png'),
 (7, 'Dryad', '2,4,6', '3,5,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_dryad.png'),
 (8, 'Sage', '2,3,4,5', '2,3,4,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_sage.png'),
 (9, 'Arcanist', '2,4,6,8', '3,5,7,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_arcanist.png'),
 (10, 'Inkshadow', '3,5,7', '4,6,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_inkshadow.png'),
 (11, 'Altruist', '2,3,4', '2,3,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_altruist.png'),
-(12, 'Artist', '1', '25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_artist.png'),
+(12, 'Artist', '1', '25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_artist.png'),
 (13, 'Exalted', '3,5', '4,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_exalted.png'),
 (14, 'Heavenly', '2,3,4,5,6,7', '2,3,4,5,6,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_heavenly.png'),
 (15, 'Porcelain', '2,4,6', '3,5,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_porcelain.png'),
 (16, 'Duelist', '2,4,6,8', '3,5,7,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_duelist.png'),
 (17, 'Dragonlord', '2,3,4,5', '2,3,4,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_dragonlord.png'),
 (18, 'Bruiser', '2,4,6,8', '3,5,7,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_bruiser.png'),
-(19, 'Trickshot', '2,4', '3,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_trickshot.png'),
+(19, 'Trickshot', '2,4', '3,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_altruist_trickshot.png'),
 (20, 'Fated', '3,5,7,10', '4,6,9,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_fated.png'),
 (21, 'Invoker', '2,4,6', '3,5,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_invoker.png'),
-(22, 'Great', '1', '25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_great.png'),
+(22, 'Great', '1', '25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_great.png'),
 (23, 'Sniper', '2,4,6', '3,5,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_sniper.png'),
 (24, 'Mythic', '3,5,7,10', '4,6,9,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_mythic.png'),
-(25, 'Spirit Walker', '1', '25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_spirit walker.png'),
+(25, 'Spirit Walker', '1', '25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_spirit_walker.png'),
 (26, 'Warden', '2,4,6', '3,5,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_warden.png'),
 (27, 'Behemoth', '2,4,6', '3,5,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_behemoth.png'),
 (28, 'Storyweaver', '3,5,7,10', '4,6,9,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_storyweaver.png');
@@ -352,6 +347,14 @@ CREATE TABLE `users` (
   `password` varchar(200) NOT NULL,
   `role` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `role`) VALUES
+(1, 'admin', '$2y$10$W6dhg1DFQjWcGDIdQKrgx.nTIBP/oRx2hZJ/qMF65BRVUxXkZBCpG', 'admin'),
+(6, 'gideon', '$2y$10$609RgfQV6tT7cqX51FR3vu8qm/5pGSv5wMf9L9fODhL2RUkVrgXme', 'user');
 
 --
 -- Indexes for dumped tables
@@ -451,7 +454,7 @@ ALTER TABLE `traits`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
