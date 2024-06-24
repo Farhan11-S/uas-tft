@@ -140,6 +140,7 @@
                         <h2>Add New User</h2>
                         <form method="post" action="add.php">
                             <input type="hidden" name="filename" id="filename" value="usersstandard">
+                            <input type="hidden" name="role" id="role" value="user">
                             <table class='addTable'>
                                 <tr>
                                     <td>username</td>
@@ -147,16 +148,7 @@
                                 </tr>
                                 <tr>
                                     <td>password</td>
-                                    <td><input type="text" name="password" placeholder="Masukkan password"></td>
-                                </tr>
-                                <tr>
-                                    <td>Role</td>
-                                    <td>
-                                        <select name="role" id="role">
-                                            <option value="admin">Admin</option>
-                                            <option value="user">User</option>
-                                        </select>
-                                    </td>
+                                    <td><input type="password" name="password" placeholder="Masukkan password"></td>
                                 </tr>
                                 <tr>
                                     <td><button type="submit" class="btn btn-simpan">Save</button></td>
@@ -174,7 +166,7 @@
                         <h2>Edit User</h2>
                         <form id="editUserForm" method="post" action="edit.php">
                             <input type="hidden" name="id" id="userId">
-                            <input type="hidden" name="filename" id="filename">
+                            <input type="hidden" name="filename" id="filenamepath">
                             <table class='editTable'>
                                 <tr>
                                     <td>Username</td>
@@ -242,7 +234,7 @@
             document.getElementById("userId").value = id;
             document.getElementById("username").value = username;
             document.getElementById("role").value = role;
-            document.getElementById("filename").value = namefile;
+            document.getElementById("filenamepath").value = namefile;
             var modal = document.getElementById("editUserModal"); 
             modal.style.display = "block";
         }

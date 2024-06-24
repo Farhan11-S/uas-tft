@@ -360,6 +360,7 @@ body {
 }
 
 .addTable input[type="text"],
+.addTable input[type="password"],
 .editTable input[type="text"], select {
   width: 100%; 
   padding: 8px; 
