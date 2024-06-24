@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 24, 2024 at 03:48 AM
+-- Generation Time: Jun 24, 2024 at 03:20 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -326,7 +326,7 @@ INSERT INTO `traits` (`id`, `name`, `min_units`, `max_units`, `image_url`) VALUE
 (18, 'Bruiser', '2,4,6,8', '3,5,7,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_6_bruiser.png'),
 (19, 'Trickshot', '2,4', '3,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_altruist_trickshot.png'),
 (20, 'Fated', '3,5,7,10', '4,6,9,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_fated.png'),
-(21, 'Invoker', '2,4,6', '3,5,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/tft/dynamicui/set11/trait_invoker.png'),
+(21, 'Invoker', '2,4,6', '3,5,25000', 'https://res.cloudinary.com/dsup3pz5v/image/upload/v1719205295/tnqofs9qxqdkm0ozfvl7.png'),
 (22, 'Great', '1', '25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_great.png'),
 (23, 'Sniper', '2,4,6', '3,5,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_6_sniper.png'),
 (24, 'Mythic', '3,5,7,10', '4,6,9,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_mythic.png'),
@@ -354,8 +354,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`) VALUES
 (1, 'admin', '$2y$10$W6dhg1DFQjWcGDIdQKrgx.nTIBP/oRx2hZJ/qMF65BRVUxXkZBCpG', 'admin'),
-(7, 'yupi', '$2y$10$3xohSj/G5EH6mQXyC/JSiOHk4AiuhNviuZ.DXhw4sCpoL9/vjG3ce', 'user'),
-(13, 'conny', '$2y$10$NNGcwwbTt1ugZ2Xs0mBZOerhErQmLUsiaOJLljg9YCb6DgLytJRuG', 'user');
+(18, 'onair', '$2y$10$t6gswQwLU5gz/KHZbmbyze17nSTuwpSEt8AVAQXUfi5yicSu3HiuW', 'user'),
+(19, 'gideon', '$2y$10$CalQnJbhLgzW7bR1CxfVg.amTCvaCzRHm2./OGcuUTfscYxyfyaXy', 'user');
 
 --
 -- Indexes for dumped tables
@@ -431,19 +431,19 @@ ALTER TABLE `champion_traits`
 -- AUTO_INCREMENT for table `comps`
 --
 ALTER TABLE `comps`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `comp_champion_details`
 --
 ALTER TABLE `comp_champion_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `comp_trait_details`
 --
 ALTER TABLE `comp_trait_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 
 --
 -- AUTO_INCREMENT for table `traits`
@@ -455,7 +455,7 @@ ALTER TABLE `traits`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Constraints for dumped tables
@@ -472,7 +472,7 @@ ALTER TABLE `champion_traits`
 -- Constraints for table `comps`
 --
 ALTER TABLE `comps`
-  ADD CONSTRAINT `comps_users_FK` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `comps_users_FK` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `comp_champion_details`
