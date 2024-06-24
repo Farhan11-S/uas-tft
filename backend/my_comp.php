@@ -64,7 +64,7 @@ function getCompsWithChampionsAndTraits($conn, $userId)
     FROM comps c
     LEFT JOIN comp_trait_details ctd ON c.id = ctd.id_comp
     LEFT JOIN traits t ON ctd.id_trait = t.id
-    WHERE c.created_by = 1
+    WHERE c.created_by = $userId
     ORDER BY c.id, ctd.value DESC
     ";
 
@@ -78,7 +78,7 @@ function getCompsWithChampionsAndTraits($conn, $userId)
             if (!isset($comps[$compId])) {
                 $comps[$compId] = [
                     'title' => $row['comp_title'],
-                    'champions' => []
+                    'traits' => []
                 ];
             }
 

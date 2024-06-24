@@ -69,7 +69,7 @@ $list = getCompsWithChampionsAndTraits($conn, $_SESSION['id']);
             <div class="section">
               <div class="traits">
                 <?php
-                foreach ($comp['traits'] as $key => $trait) {
+                foreach ($comp['traits'] ?? [] as $key => $trait) {
                   if (!empty($trait['value'])) echo '<img src="' . $trait['image_url'] . '" class="traits-icon" alt="' . $trait['name'] . '" />';
                   if (!empty($trait['value'])) echo '<div class="trait-count">' . $trait['value'] . '</div>';
                 }
