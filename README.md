@@ -6,3 +6,5 @@
 2. IMPORT DB 
     - copy the SQL query from the file `backend/uas-tft.aql`
     - Paste and run the SQL query
+
+NOTE: if you're using xampp put the folder into htdocs
