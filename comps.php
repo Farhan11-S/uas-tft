@@ -1,9 +1,8 @@
 <?php
 
 require_once 'backend/my_comp.php';
-if(!isset($_SESSION)) 
-{ 
-    session_start(); 
+if (!isset($_SESSION)) {
+  session_start();
 }
 if (!isset($_SESSION['username'])) header("location:./auth/sign-in.php");
 
@@ -21,6 +20,47 @@ $list = getCompsWithChampionsAndTraits($conn, $_SESSION['id']);
   <link rel="stylesheet" href="./public/styles/style-comps.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
+
+<script>
+  function showPopup(popupId) {
+    document.getElementById(popupId).style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+    document.querySelector('.content').classList.add('blur');
+  }
+
+  function closePopup(popupId) {
+    document.getElementById(popupId).style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+    document.querySelector('.content').classList.remove('blur');
+  }
+
+  function showEditTitlePopup() {
+    showPopup("editTitlePopup");
+  }
+
+  function showDeleteConfirmation() {
+    showPopup("deleteConfirmPopup");
+  }
+
+  document.getElementById("deleteForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    if (confirm("Anda yakin ingin menghapus item ini?")) {
+      this.submit();
+    }
+  });
+
+  document.getElementById("editTitleForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    var newTitle = document.getElementById("newTitle").value;
+    console.log("Judul baru: " + newTitle);
+    closePopup("editTitlePopup");
+  });
+
+  document.getElementById("overlay").addEventListener("click", function(event) {
+    event.stopPropagation();
+  });
+</script>
+
 
 <body>
   <div class="header">
@@ -67,11 +107,17 @@ $list = getCompsWithChampionsAndTraits($conn, $_SESSION['id']);
           <div><?= $comp['title'] ?></div>
           <div class="right-side">
             <div class="section">
-              <div class="traits">
+              <div style="display: flex; column-gap: 12px; align-items: center;">
                 <?php
                 foreach ($comp['traits'] ?? [] as $key => $trait) {
-                  if (!empty($trait['value'])) echo '<img src="' . $trait['image_url'] . '" class="traits-icon" alt="' . $trait['name'] . '" />';
-                  if (!empty($trait['value'])) echo '<div class="trait-count">' . $trait['value'] . '</div>';
+                ?>
+                  <div class="traits">
+                    <?php
+                    if (!empty($trait['value'])) echo '<img src="' . $trait['image_url'] . '" class="traits-icon" alt="' . $trait['name'] . '" />';
+                    if (!empty($trait['value'])) echo '<div class="trait-count">' . $trait['value'] . '</div>';
+                    ?>
+                  </div>
+                <?php
                 }
                 ?>
               </div>
@@ -85,16 +131,35 @@ $list = getCompsWithChampionsAndTraits($conn, $_SESSION['id']);
             </div>
           </div>
           <div class="action-comp">
-            <i class="fa fa-edit"></i>
-            <form action="./backend/my_comp.php" method="post">
-              <input type="hidden" name="id_comp" value="<?= $id ?>">
-              <button type="submit" name="delete" class="fa fa-trash" style="color: red; margin-top: 8px"></button>
-            </form>
+            <div onclick="showEditTitlePopup()" class="fa fa-edit"></div>
+            <div onclick="showDeleteConfirmation()" class="fa fa-trash" style="color: red; margin-top: 8px"></div>
           </div>
+        </div>
+        <div class="popup" id="editTitlePopup">
+          <h2>Change Title</h2>
+          <form id="editTitleForm">
+            <input class="input-title" id="title" type="text" name="title" placeholder="Enter your title comp" required />
+            <div>
+              <button type="submit" name="title" class="primary" style="margin-right: 20px;">Simpan</button>
+              <button type="button" onclick="closePopup('editTitlePopup')" class="secondary">Batal</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="popup" id="deleteConfirmPopup">
+          <h2>Konfirmasi Hapus</h2>
+          <p>Apakah Anda yakin ingin menghapus item ini?</p>
+          <form id="deleteForm" action="./backend/my_comp.php" method="post">
+            <input type="hidden" name="id_comp" value="<?= $id ?>">
+            <button type="submit" class="primary">Ya, Hapus</button>
+            <button type="button" onclick="closePopup('deleteConfirmPopup')" class="secondary">Batal</button>
+          </form>
         </div>
       <?php
       }
       ?>
+      <div class="popup-overlay" id="overlay"></div>
+
     </div>
   </div>
 </body>

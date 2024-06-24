@@ -10,6 +10,7 @@ body {
   font-family: "Outfit", sans-serif;
   background: var(--bg);
   color: #fff;
+  transition: filter 0.3s ease-in-out;
 }
 
 *:focus {
@@ -147,8 +148,8 @@ a {
   align-items: center;
   column-gap: 4px;
   font-size: 12px;
-  border: 1px solid #f9d978;
-  color: f9d978;
+  border: 1px solid #fff;
+  color: #fff;
   border-radius: 4px;
   padding: 4px;
 }
@@ -156,7 +157,6 @@ a {
 .my-comps .comps .card-comp .right-side .traits .traits-icon {
   width: 12px;
   height: 12px;
-  background: #331312;
 }
 
 .my-comps .comps .card-comp .right-side .units {
@@ -253,7 +253,14 @@ form button {
   row-gap: 8px;
 }
 
+.sidebar .traits .icon-trait {
+  width: 70px;
+  height: 70px;
+}
+
 .sidebar .traits .card-trait {
+  display: flex;
+  align-items: center;
   padding: 12px 22px;
   background: var(--bg);
   border-radius: 12px;
@@ -295,4 +302,45 @@ form button {
   width: 50px;
   height: 50px;
   border-radius: 12px;
+}
+
+.blur {
+  filter: blur(5px);
+  pointer-events: none;
+}
+.popup {
+  display: none;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--bg);
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+.popup-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+.popup h2 {
+  margin-top: 0;
+}
+.popup input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+}
+
+#editTitleForm {
+  display: flex;
+  flex-direction: column;
 }

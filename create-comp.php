@@ -117,7 +117,7 @@ $listChampion = getChampionsWithTraits($conn);
 
             const imageNode = document.createElement("img")
             imageNode.src = trait.image_url
-            imageNode.className = 'unit'
+            imageNode.className = 'icon-trait'
 
             const cardTrait = document.createElement('div')
             cardTrait.className = 'card-trait'
