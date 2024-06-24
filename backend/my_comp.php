@@ -1,8 +1,7 @@
 <?php
-if(!isset($_SESSION)) 
-{ 
-    session_start(); 
-} 
+if (!isset($_SESSION)) {
+    session_start();
+}
 // Include the database connection file
 require_once 'main.php';
 require_once 'helper.php';
@@ -205,6 +204,11 @@ function deleteComp($conn, $idComp)
     $conn->query("DELETE FROM comps WHERE id = '$idComp'");
 }
 
+function updateComp($conn, $idComp, $title)
+{
+    $conn->query("UPDATE comps SET title='$title' WHERE id='$idComp'");
+}
+
 if (isset($_POST['store'])) {
     $idChampions = $_POST['id_champions'];
     $compTitle = $_POST['title'];
@@ -218,6 +222,15 @@ if (isset($_POST['delete'])) {
     $idComp = $_POST['id_comp'];
 
     deleteComp($conn, $idComp);
+
+    header("location:../comps.php");
+}
+
+if (isset($_POST['update'])) {
+    $idComp = $_POST['id_comp'];
+    $title = $_POST['title'];
+
+    updateComp($conn, $idComp, $title);
 
     header("location:../comps.php");
 }

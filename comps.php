@@ -24,41 +24,21 @@ $list = getCompsWithChampionsAndTraits($conn, $_SESSION['id']);
 <script>
   function showPopup(popupId) {
     document.getElementById(popupId).style.display = "block";
-    document.getElementById("overlay").style.display = "block";
-    document.querySelector('.content').classList.add('blur');
   }
 
   function closePopup(popupId) {
     document.getElementById(popupId).style.display = "none";
-    document.getElementById("overlay").style.display = "none";
-    document.querySelector('.content').classList.remove('blur');
   }
 
-  function showEditTitlePopup() {
+  function showEditTitlePopup(id) {
+    document.getElementById('id_comp_edit').value = id;
     showPopup("editTitlePopup");
   }
 
-  function showDeleteConfirmation() {
+  function showDeleteConfirmation(id) {
+    document.getElementById('id_comp').value = id;
     showPopup("deleteConfirmPopup");
   }
-
-  document.getElementById("deleteForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    if (confirm("Anda yakin ingin menghapus item ini?")) {
-      this.submit();
-    }
-  });
-
-  document.getElementById("editTitleForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    var newTitle = document.getElementById("newTitle").value;
-    console.log("Judul baru: " + newTitle);
-    closePopup("editTitlePopup");
-  });
-
-  document.getElementById("overlay").addEventListener("click", function(event) {
-    event.stopPropagation();
-  });
 </script>
 
 
@@ -131,16 +111,17 @@ $list = getCompsWithChampionsAndTraits($conn, $_SESSION['id']);
             </div>
           </div>
           <div class="action-comp">
-            <div onclick="showEditTitlePopup()" class="fa fa-edit"></div>
-            <div onclick="showDeleteConfirmation()" class="fa fa-trash" style="color: red; margin-top: 8px"></div>
+            <div onclick="showEditTitlePopup(<?= $id ?>)" class="fa fa-edit"></div>
+            <div onclick="showDeleteConfirmation(<?= $id ?>)" class="fa fa-trash" style="color: red; margin-top: 8px"></div>
           </div>
         </div>
         <div class="popup" id="editTitlePopup">
           <h2>Change Title</h2>
-          <form id="editTitleForm">
+          <form id="editTitleForm" action="./backend/my_comp.php" method="post">
+            <input type="hidden" name="id_comp" id="id_comp_edit">
             <input class="input-title" id="title" type="text" name="title" placeholder="Enter your title comp" required />
             <div>
-              <button type="submit" name="title" class="primary" style="margin-right: 20px;">Simpan</button>
+              <button type="submit" class="primary" style="margin-right: 20px;" name="update">Simpan</button>
               <button type="button" onclick="closePopup('editTitlePopup')" class="secondary">Batal</button>
             </div>
           </form>
@@ -150,18 +131,15 @@ $list = getCompsWithChampionsAndTraits($conn, $_SESSION['id']);
           <h2>Konfirmasi Hapus</h2>
           <p>Apakah Anda yakin ingin menghapus item ini?</p>
           <form id="deleteForm" action="./backend/my_comp.php" method="post">
-            <input type="hidden" name="id_comp" value="<?= $id ?>">
-            <button type="submit" class="primary">Ya, Hapus</button>
+            <input type="hidden" name="id_comp" id="id_comp">
+            <button type="submit" class="primary" name="delete">Ya, Hapus</button>
             <button type="button" onclick="closePopup('deleteConfirmPopup')" class="secondary">Batal</button>
           </form>
         </div>
       <?php
       }
       ?>
-      <div class="popup-overlay" id="overlay"></div>
-
     </div>
-  </div>
 </body>
 
 </html>
