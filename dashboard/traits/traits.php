@@ -277,6 +277,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search'])) {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     // Update konten table dengan respons dari server
                     document.getElementById('traitsTable').innerHTML = xhr.responseText;
+                    handleModal("editUserModal", ".btn-edit", "edit-close");
                 }
             };
             xhr.send("search=" + encodeURIComponent(input));

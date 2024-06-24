@@ -232,12 +232,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search'])) {
         let toggle = document.querySelector(".toggle");
         let navigation = document.querySelector(".navigation");
         let main = document.querySelector(".main");
-
+        
         toggle.onclick = function () {
             navigation.classList.toggle("active");
             main.classList.toggle("active");
         };
-
+        
         // General modal handling
         function editUser(id, name, cost, apiname, imgurl) {
             document.getElementById("championId").value = id;
@@ -248,12 +248,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search'])) {
             var modal = document.getElementById("editUserModal"); 
             modal.style.display = "block";
         }
-
+        
         function handleModal(modalId, btnSelector, closeClass) {
             var modal = document.getElementById(modalId);
             var btns = document.querySelectorAll(btnSelector);
             var span = document.getElementsByClassName(closeClass)[0];
-
+            
             btns.forEach(function(btn) {
                 btn.onclick = function() {
                     if(modalId === "editUserModal") {
@@ -272,7 +272,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search'])) {
             span.onclick = function() {
                 modal.style.display = "none";
             }
-        
+            
             window.onclick = function(event) {
                 var modals = document.querySelectorAll('.modal');
                 modals.forEach(function(modal) {
@@ -282,9 +282,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search'])) {
                 });
             }
         }
-
+        
         handleModal("editUserModal", ".btn-edit", "edit-close");
-
+        
         function searchChampion() {
             var input = document.getElementById('searchInput').value;
 
@@ -296,6 +296,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search'])) {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     // Update konten table dengan respons dari server
                     document.getElementById('championsTable').innerHTML = xhr.responseText;
+                    handleModal("editUserModal", ".btn-edit", "edit-close");
                 }
             };
             xhr.send("search=" + encodeURIComponent(input));
