@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 23, 2024 at 02:40 PM
+-- Generation Time: Jun 24, 2024 at 03:48 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -354,7 +354,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`) VALUES
 (1, 'admin', '$2y$10$W6dhg1DFQjWcGDIdQKrgx.nTIBP/oRx2hZJ/qMF65BRVUxXkZBCpG', 'admin'),
-(6, 'gideon', '$2y$10$609RgfQV6tT7cqX51FR3vu8qm/5pGSv5wMf9L9fODhL2RUkVrgXme', 'user');
+(7, 'yupi', '$2y$10$3xohSj/G5EH6mQXyC/JSiOHk4AiuhNviuZ.DXhw4sCpoL9/vjG3ce', 'user'),
+(13, 'conny', '$2y$10$NNGcwwbTt1ugZ2Xs0mBZOerhErQmLUsiaOJLljg9YCb6DgLytJRuG', 'user');
 
 --
 -- Indexes for dumped tables
@@ -430,19 +431,19 @@ ALTER TABLE `champion_traits`
 -- AUTO_INCREMENT for table `comps`
 --
 ALTER TABLE `comps`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `comp_champion_details`
 --
 ALTER TABLE `comp_champion_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `comp_trait_details`
 --
 ALTER TABLE `comp_trait_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `traits`
@@ -454,7 +455,7 @@ ALTER TABLE `traits`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
@@ -478,13 +479,13 @@ ALTER TABLE `comps`
 --
 ALTER TABLE `comp_champion_details`
   ADD CONSTRAINT `comp_champion_details_champions_FK` FOREIGN KEY (`id_champion`) REFERENCES `champions` (`id`),
-  ADD CONSTRAINT `comp_champion_details_comps_FK` FOREIGN KEY (`id_comp`) REFERENCES `comps` (`id`);
+  ADD CONSTRAINT `comp_champion_details_comps_FK` FOREIGN KEY (`id_comp`) REFERENCES `comps` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `comp_trait_details`
 --
 ALTER TABLE `comp_trait_details`
-  ADD CONSTRAINT `comp_trait_details_comps_FK` FOREIGN KEY (`id_comp`) REFERENCES `comps` (`id`),
+  ADD CONSTRAINT `comp_trait_details_comps_FK` FOREIGN KEY (`id_comp`) REFERENCES `comps` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `comp_trait_details_traits_FK` FOREIGN KEY (`id_trait`) REFERENCES `traits` (`id`);
 COMMIT;
 
