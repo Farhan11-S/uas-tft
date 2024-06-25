@@ -326,7 +326,7 @@ INSERT INTO `traits` (`id`, `name`, `min_units`, `max_units`, `image_url`) VALUE
 (18, 'Bruiser', '2,4,6,8', '3,5,7,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_6_bruiser.png'),
 (19, 'Trickshot', '2,4', '3,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_altruist_trickshot.png'),
 (20, 'Fated', '3,5,7,10', '4,6,9,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_fated.png'),
-(21, 'Invoker', '2,4,6', '3,5,25000', 'https://res.cloudinary.com/dsup3pz5v/image/upload/v1719205295/tnqofs9qxqdkm0ozfvl7.png'),
+(21, 'Invoker', '2,4,6', '3,5,25000', 'https://res.cloudinary.com/dsup3pz5v/image/upload/v1719318228/fitzejeyqazeoewexejx.png'),
 (22, 'Great', '1', '25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_great.png'),
 (23, 'Sniper', '2,4,6', '3,5,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_6_sniper.png'),
 (24, 'Mythic', '3,5,7,10', '4,6,9,25000', 'https://raw.communitydragon.org/latest/game/assets/ux/traiticons/trait_icon_11_mythic.png'),
