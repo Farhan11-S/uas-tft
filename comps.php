@@ -24,10 +24,14 @@ $list = getCompsWithChampionsAndTraits($conn, $_SESSION['id']);
 <script>
   function showPopup(popupId) {
     document.getElementById(popupId).style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+    document.querySelector('.content').classList.add('blur');
   }
 
   function closePopup(popupId) {
     document.getElementById(popupId).style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+    document.querySelector('.content').classList.add('blur');
   }
 
   function showEditTitlePopup(id) {
@@ -139,6 +143,7 @@ $list = getCompsWithChampionsAndTraits($conn, $_SESSION['id']);
       <?php
       }
       ?>
+      <div class="popup-overlay" id="overlay"></div>
     </div>
 </body>
 

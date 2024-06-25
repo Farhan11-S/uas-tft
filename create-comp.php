@@ -7,7 +7,7 @@ if (!isset($_SESSION)) {
 if (!isset($_SESSION['username'])) header("location:./auth/sign-in.php");
 
 $listChampion = getChampionsWithTraits($conn);
-
+$error_message = isset($_GET['error_message']) ? htmlspecialchars($_GET['error_message']) : '';
 ?>
 <!DOCTYPE html>
 <html>
@@ -138,11 +138,11 @@ $listChampion = getChampionsWithTraits($conn);
     }
 
     window.onload = () => {
-        const errorGet = decodeURIComponent("<?= rawurlencode($_GET['error_message']); ?>");
+        const errorGet = "<?= $error_message ?>";
 
-        if (errorGet) alert(errorGet)
-        console.log(errorGet);
+        if (errorGet) alert(errorGet);
     }
+
 </script>
 
 <body>
