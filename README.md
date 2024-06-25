@@ -12,8 +12,8 @@ NOTE:
 - for login in dashboard admin you can login with default username:password (admin:admin)
 
 Anggota Kelompok:
-- Azharul Hakim (202351063)
-- Farhan Sangaji (202351086)
-- Alan Lanang Ichsan (202351052)
-- Ahmad Dany Syahputra (202351042)
-- Muhammad Bintang Pamungkas (202351067)
+- Azharul Hakim (202351063)                 - CRUD Champion 
+- Farhan Sangaji (202351086)                - CRUD User Standar
+- Alan Lanang Ichsan (202351052)            - CRUD Comps
+- Ahmad Dany Syahputra (202351042)          - CRUD Traits
+- Muhammad Bintang Pamungkas (202351067)    - CRUD User Admin
