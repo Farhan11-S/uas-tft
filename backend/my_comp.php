@@ -210,16 +210,17 @@ function updateComp($conn, $idComp, $title)
 }
 
 if (isset($_POST['store'])) {
-        if (!empty($_POST['id_champions']) && is_array($_POST['id_champions'])) {
-            $idChampions = $_POST['id_champions'];
-            $compTitle = $_POST['title'];
-    
-            storeComp($conn, $idChampions, $compTitle, $_SESSION['id']);
-            header("location:../comps.php");
-        } else {
-            echo "<script>alert('Please select at least one champion.'); window.location.href = '../create-comp.php'</script>";
-        }
-    
+    $idChampions = $_POST['id_champions'];
+    $compTitle = $_POST['title'];
+
+    if (empty($idChampions)) {
+        header("location:../create-comp.php?error_message=pick your champion first");
+        die;
+    }
+
+    storeComp($conn, $idChampions, $compTitle, $_SESSION['id']);
+
+    header("location:../comps.php");
 }
 
 if (isset($_POST['delete'])) {

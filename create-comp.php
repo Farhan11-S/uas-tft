@@ -1,10 +1,9 @@
 <?php
 
 require_once 'backend/my_comp.php';
-if(!isset($_SESSION)) 
-{ 
-    session_start(); 
-} 
+if (!isset($_SESSION)) {
+    session_start();
+}
 if (!isset($_SESSION['username'])) header("location:./auth/sign-in.php");
 
 $listChampion = getChampionsWithTraits($conn);
@@ -136,6 +135,13 @@ $listChampion = getChampionsWithTraits($conn);
 
             traitSection.appendChild(cardTrait)
         });
+    }
+
+    window.onload = () => {
+        const errorGet = decodeURIComponent("<?= rawurlencode($_GET['error_message']); ?>");
+
+        if (errorGet) alert(errorGet)
+        console.log(errorGet);
     }
 </script>
 
